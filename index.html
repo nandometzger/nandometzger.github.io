@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YC-Jiang</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/yc.JPG" alt="Richard hanrick" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Yuchang Jiang">Yuchang Jiang</h1>
+
+          <p class="title">PhD student in Data Science</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:yuchang.jiang@uzh.ch" class="contact-link">yuchang.jiang@uzh.ch</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Winterthurerstrasse 190, 8057 Zürich</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+          <li class="social-item">
+            <a href="https://github.com/SherryJYC" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/yuchang-jiang-451805141/" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://scholar.google.com.hk/citations?user=u9k4HecAAAAJ&hl=en" class="social-link">
+              <ion-icon name="logo-google"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link  active" data-nav-link>About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Publication</button>
+          </li>
+
+          <!-- <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portfolio</button>
+          </li> -->
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Project</button>
+          </li>
+
+          <!-- <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Publication</button>
+          </li> -->
+
+        </ul>
+
+      </nav>
+
+
+
+
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about  active" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>
+            I am a first-year PhD student in the 
+            <a style="display:inline" href="https://www.ics.uzh.ch/en.html">Institute for Computational Science, University of Zurich</a>
+            and I am also affiliated with the 
+            <a style="display:inline" href="https://prs.igp.ethz.ch/ecovision.html">EcoVision Lab, ETH Zurich</a>. 
+            My supervisors are 
+            <a style="display:inline" href="https://scholar.google.ch/citations?user=sxLG1rgAAAAJ&hl=en">Prof. Jan Dirk Wegner</a> 
+            and 
+            <a style="display:inline" href="https://scholar.google.ch/citations?user=FZuNgqIAAAAJ&hl=en">Prof. Konrad Schindler</a>. 
+           My research interests lie in computer vision, remote sensing, deep learning, and global vegeation parameter estimation.
+        
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">University of Zürich</h4>
+
+              <span>Nov.2021 - present</span>
+
+              <p class="timeline-text">
+                PhD student at the Institute for Computational Science, University of Zurich, and also affiliated with EcoVision Lab, ETH Zurich. 
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">ETH Zürich</h4>
+
+              <span>2019 - 2021</span>
+
+              <p class="timeline-text">
+                Master's degree in Geomatics <br/>
+                Grade: 5.73/6
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">The Hong Kong Polytechnic University
+                </h4>
+
+              <span>2015 — 2019</span>
+
+              <p class="timeline-text">
+                Bachelor's degree in Geomatics with minor in Computing <br/>
+                Grade: 3.83/4
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+
+        <!--
+          - service
+        -->
+
+        <section class="service">
+
+          <h3 class="h3 service-title">What i'm doing</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg
+                " alt="design icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Interests</h4>
+
+                <p class="service-item-text">
+                  Computer Vision <br/> 
+                  Deep Learning  <br/>
+                  Remote Sensing <br/>
+                  Vegetation Parameter Estimation
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Leisure</h4>
+
+                <p class="service-item-text">
+                  Badminton <br/> 
+                  Cooking  <br/>
+                  Swimming <br/>
+                  Board Games
+                </p>
+              </div>
+
+            </li>
+
+          </ul>
+
+          
+        </section>
+        <p class="about-text", style="text-align: right;">
+          Thanks for the <a href="https://github.com/codewithsadee/vcard-personal-portfolio">template</a>
+         </p>
+
+
+        <!--
+          - testimonials modal
+        -->
+
+        <div class="modal-container" data-modal-container>
+
+          <div class="overlay" data-overlay></div>
+
+          <section class="testimonials-modal">
+
+            <button class="modal-close-btn" data-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+            <div class="modal-img-wrapper">
+              <figure class="modal-avatar-box">
+                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
+              </figure>
+
+              <img src="./assets/images/icon-quote.svg" alt="quote icon">
+            </div>
+
+            <div class="modal-content">
+
+              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
+
+              <time datetime="2021-06-14">14 June, 2021</time>
+
+              <div data-modal-text>
+                <p>
+                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
+                  lot of experience
+                  and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
+                  consectetur adipiscing
+                  elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
+                </p>
+              </div>
+
+            </div>
+
+          </section>
+
+        </div> 
+
+      </article>
+
+
+
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="publication">
+        <header>
+          <h2 class="h2 article-title">Publication</h2>
+
+          <section class="about-text">
+            <ul>
+              <li class="service-item">
+                <p class="service-item-text">
+                <b>Learning a Sensor-invariant Embedding of Satellite Data: A Case Study for Lake Ice Monitoring </b>
+                <br/>
+                Manu Tom, <b>Yuchang Jiang </b>, Emmanuel Baltsavias and Konrad Schindler,
+                arXiv preprint, 2021 <br/>
+                <a href="#">paper</a>
+              </li>
+
+              <li class="service-item">
+                <p class="service-item-text">
+                <b>Annual vegetation height maps based on Sentinel-2 data – Potential applications for the Swiss National Forest Inventory </b>
+                <br/>
+                Marius Rüetschi, <b>Yuchang Jiang </b>, Nico	Lang,	Alexander	Becker,	Lars T. Waser, Mauro	Marty, Konrad Schindler, Jan Dirk	
+                Wegner, Christian	Ginzler,
+                ESA Living Planet Symposium 2022 (LPS 2022) <br/>
+                <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Papers/Jiang_LivingPlanet.pdf">paper</a>
+              </li>
+
+              <li class="service-item">
+                <p class="service-item-text">
+                <b>SemSpray: Virtual Reality As-Is Semantic Information Labeling Tool for 3D Spatial Data</b>
+                <br/>
+                Yiming Zhao*, Cyprien Fol*, <b>Yuchang Jiang</b>, Tianyu Wu, Iro Armeni,
+                EC3 Conference, 2022<br/>
+                <a href="https://ec-3.org/publications/conferences/EC32022/papers/EC32022_175.pdf">paper</a> <a href="https://github.com/SherryJYC/VR-3D-Annotation-Tool">code</a>
+              </li>
+
+            </ul>
+              
+          </section>
+        </header>
+      </article>
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Publication</h2>
+        </header>
+
+        <section> 
+
+          <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web design</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Applications</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web development</button>
+            </li>
+
+          </ul>
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-selecct-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web design</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Applications</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web development</button>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <ul class="project-list">
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Finance</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Orizon</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Fundo</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Brawlhalla</h3>
+
+                <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
+                </figure>
+
+                <h3 class="project-title">DSM.</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">MetaSpark</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Summary</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Task Manager</h3>
+
+                <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Arrival</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+          </ul> 
+
+        </section>
+
+      </article> 
+
+
+
+
+
+      <!--
+        - #PROJECT
+      -->
+
+      <article class="blog" data-page="project">
+
+        <header>
+          <h2 class="h2 article-title">Project</h2>
+        </header>
+
+        <section class="blog-posts">
+
+          <ul class="blog-posts-list">
+
+            <li class="blog-post-item">
+              <a href="https://github.com/SherryJYC/3D-Tracking-MVS">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/cam1_right_team.gif" alt="football-player-track" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Object Tracking</p>
+
+                    <span class="dot"></span>
+
+                    <!-- <time datetime="2022-02-23">Fab 23, 2022</time> -->
+                  </div>
+
+                  <h3 class="h3 blog-item-title">3D Player Tracking with Multi-View Stream</h3>
+
+                  <p class="blog-text">
+                    This project provides a full pipeline to support 3D position tracking of soccer players, with multi-view calibrated moving/fixed video sequences as inputs.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="https://github.com/Tianyu-Wu/HoloInspect">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/holoinspect.png" alt="holoinspect" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Mixed Reality</p>
+
+                    <span class="dot"></span>
+
+                    <!-- <time datetime="2022-02-23">Fab 23, 2022</time> -->
+                  </div>
+
+                  <h3 class="h3 blog-item-title">HoloInspect - Mixed Reality for BIM Software</h3>
+
+                  <p class="blog-text">
+                    With Microsoft HoloLens, our application, HoloInspect, provides additional mixed reality support for traditional BIM software in three construction stages: presentation, management and on-site inspection, with partial multi-user capabilities.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="https://github.com/SherryJYC/VR-3D-Annotation-Tool">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/semspray.png" alt="semspray" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Mixed Reality</p>
+
+                    <span class="dot"></span>
+
+                    <!-- <time datetime="2022-02-23">Fab 23, 2022</time> -->
+                  </div>
+
+                  <h3 class="h3 blog-item-title">SemSpray - VR Annotation Tool for 3D Scene</h3>
+
+                  <p class="blog-text">
+                    SemSpray is a VR application to facilitate the labeling of 3D scene with both user-dynmaic and user-static modes.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="https://github.com/SherryJYC/COVID_19_Visualization">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/covid_vis.png" alt="covid_vis" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Application</p>
+
+                    <span class="dot"></span>
+
+                    <!-- <time datetime="2022-02-23">Fab 23, 2022</time> -->
+                  </div>
+
+                  <h3 class="h3 blog-item-title">COVID-19 in China - An Interactive Web Atlas</h3>
+
+                  <p class="blog-text">
+                    The objective of this project is to show dynamic change of COVID-19 in China and compare COVID-19 with SARS.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="https://github.com/SherryJYC/Education-Web-Atlas">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/edu_vis.png" alt="education_atlas" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Application</p>
+
+                    <span class="dot"></span>
+
+                    <!-- <time datetime="2022-02-23">Fab 23, 2022</time> -->
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Equality Education - An Interactive Web Atlas</h3>
+
+                  <p class="blog-text">
+                    This project is based on the sustainable Development Goal 4 of the United Nations. Its objective is to provide users a vision of education equality using the map and statistical charts.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #CONTACT
+      -->
+
+      <article class="contact" data-page="contact">
+
+        <header>
+          <h2 class="h2 article-title">Publication</h2>
+        </header>
+
+        <section class="mapbox" data-mapbox>
+          <figure>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
+              width="400" height="300" loading="lazy"></iframe>
+          </figure>
+        </section>
+
+        <section class="contact-form">
+
+          <h3 class="h3 form-title">Contact Form</h3>
+
+          <form action="#" class="form" data-form>
+
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+
+              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+            </div>
+
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+
+          </form>
+
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
