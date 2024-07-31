@@ -130,6 +130,53 @@
 
 
 
+    <tr onmouseout="betterdepth_stop()" onmouseover="betterdepth_start()">
+      <td style="padding:20px;width:25%;vertical-align:middle">
+        <div class="one">
+          <div class="two" id='betterdepth_image'><video  width=100% height=100% muted autoplay loop>
+          <source src="assets/BetterDepth_depth.png" type="video/mp4">
+          Your browser does not support the video tag.
+          </video></div>
+          <img src='Bassets/BetterDepth_depth.png' width="160">
+        </div>
+        <script type="text/javascript">
+          function thera_start() {
+            document.getElementById('betterdepth_image').style.opacity = "1";
+          }
+
+          function thera_stop() {
+            document.getElementById('betterdepth_image').style.opacity = "0";
+          }
+          thera_stop()
+        </script>
+      </td>
+      <td style="padding:20px;width:75%;vertical-align:middle">
+        <a href="https://huggingface.co/papers/2407.17952">
+			<span class="papertitle">BetterDepth: Plug-and-Play Diffusion Refiner for Zero-Shot Monocular Depth Estimation
+</span>
+        </a>
+        <br>
+	<a href="https://xiangz-0.github.io/">Xiang Zhang</a>, 
+	<a href="http://www.kebingxin.com/">Bingxin Ke</a>,
+	<a href="https://riemenschneider.hayko.at/">Hayko Riemenschneider</a>, 
+        <strong>Nando Metzger</strong>, 
+        <a href="https://www.obukhov.ai/">Anton Obukhov</a>, 
+        <a href="https://scholar.google.ch/citations?user=uxk0GmUAAAAJ&hl=en">Markus Gross</a>, 
+        <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>, 
+        <a href="https://scholar.google.ch/citations?user=j0nCulgAAAAJ&hl=en">Christopher Schroers</a>, 
+        <br>
+        <em>arXiv</em>, 2023
+        <br> 
+        <a href="https://arxiv.org/abs/2407.17952">arXiv</a>
+        /
+        <a href="https://huggingface.co/papers/2407.17952">project</a>
+        <p></p>
+        <p>
+          BetterDepth is a plug-and-play diffusion-based refiner that boosts the performance of any SOTA zero-shot monocular depth estimation method.
+        </p>
+      </td>
+    </tr>
+
 
     <tr onmouseout="marigold_stop()" onmouseover="marigold_start()" bgcolor="#c7eaf2">
       <td style="padding:20px;width:25%;vertical-align:middle">
@@ -157,11 +204,11 @@
 </span>
         </a>
         <br>
-				<a href="http://www.kebingxin.com/">Bingxin Ke</a>,
+	<a href="http://www.kebingxin.com/">Bingxin Ke</a>,
         <a href="https://www.obukhov.ai/">Anton Obukhov</a>, 
         <a href="https://shengyuh.github.io/">Shengyu Huang</a>,
         <strong>Nando Metzger</strong>, 
-				<a href="https://rcdaudt.github.io/">Rodrigo Caye Daudt</a>, 
+	<a href="https://rcdaudt.github.io/">Rodrigo Caye Daudt</a>, 
         <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>, 
 
         <br>
