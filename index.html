@@ -387,7 +387,47 @@ h<!DOCTYPE HTML>
         </p>
       </td>
     </tr>
-	
+
+
+		  
+    <tr onmouseout="MLfocal_stop()" onmouseover="MLfocal_start()">
+      <td style="padding:20px;width:25%;vertical-align:middle">
+        <div class="one">
+          <div class="two" id='MLfocal_image'><video  width=100% muted autoplay loop>
+          <source src="assets/images/stone_tagged2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+          </video></div>
+          <img src='assets/images/stone_tagged2.png' width=100%>
+        </div>
+        <script type="text/javascript">
+          function dada_start() {
+            document.getElementById('MLfocal_image').style.opacity = "1";
+          }
+
+          function dada_stop() {
+            document.getElementById('MLfocal_image').style.opacity = "0";
+          }
+          MLfocal_stop()
+        </script>
+      </td>
+      <td style="padding:20px;width:75%;vertical-align:middle">
+        <a href="https://github.com/nandometzger/MLFocalLengths">
+          <span class="papertitle">MLFocalLengths: Estimating the Focal Length of a Single Image</span>
+        </a>
+        <br>
+	<strong>Nando Metzger</strong>,  
+        <br>
+        <em>GitHub Project</em>, 2023
+        <br>
+        <a href="https://github.com/nandometzger/MLFocalLengths/tree/main">code</a>
+        <p></p>
+        <p>
+          Information about the focal length with which a photo is taken might be obstructed (internet photos) or not available (vintage photos).
+	  Inferring the focal length of a photo solely from a monocular view is an ill-posed task that requires knowledge about the scale of objects and their distance to the camera - e.g. scene understanding.
+	  I trained a deep learning model to acquire such scene understanding to predict the focal length and open-source the model with this repository.
+        </p>
+      </td>
+    </tr>
 
     <tr onmouseout="nuvo_stop()" onmouseover="nuvo_start()">
       <td style="padding:20px;width:25%;vertical-align:middle">
