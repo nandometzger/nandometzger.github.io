@@ -101,7 +101,69 @@
           </tbody></table>
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
+
+
+
+		  
             
+            <tr onmouseout="marigoldDC_stop()" onmouseover="marigoldDC_start()" bgcolor="#c7eaf2">
+              <td style="padding:20px;width:25%;vertical-align:middle">
+                <div class="one">
+          <div class="two" id='marigoldDC_image'><video  width=100% height=100% muted autoplay loop>
+          <source src="assets/images/marigold_dc_video.webm" type="video/mp4">
+          Your browser does not support the video tag.
+        </video></div>
+          <img src='assets/images/marigolddc_logo_square.jpg' width="160">
+        </div>
+        <script type="text/javascript">
+          function marigoldDC_start() {
+            document.getElementById('marigoldDC_image').style.opacity = "1";
+          }
+
+          function marigoldDC_stop() {
+            document.getElementById('marigoldDC_image').style.opacity = "0";
+          }
+          marigoldDC_stop()
+          </script>
+      </td>
+      <td style="padding:20px;width:75%;vertical-align:middle">
+        <a href="https://marigolddepthcompletion.github.io/">
+			<span class="papertitle">⇆ Marigold-DC: Zero-Shot Monocular Depth Completion with Guided Diffusion
+</span>
+</a>
+        <br>
+	<a href="https://www.linkedin.com/in/massimiliano-viola/">Massimiliano Viola</a>,
+	<a href="https://www.linkedin.com/in/kevin-qu-b3417621b/">Kevin Qu</a>,
+        <strong>Nando Metzger</strong>, 
+	<a href="http://www.kebingxin.com/">Bingxin Ke</a>,
+	<a href="https://scholar.google.ch/citations?user=Wle2GmkAAAAJ&hl=en">Alexander Becker</a>,
+        <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>
+  	<a href="https://www.obukhov.ai/">Anton Obukhov</a>, 
+
+        <br>
+        <em>ArXiv</em>, 2024 &nbsp <font color="red"><strong></strong></font>
+        <br>
+        <a href="https://marigolddepthcompletion.github.io/">project page</a>
+        /
+        <a href="https://arxiv.org/abs/2412.13389">arXiv</a>
+        /
+        <a href="https://github.com/prs-eth/Marigold-DC">code</a>
+        /
+        <a href="https://huggingface.co/spaces/prs-eth/marigold-dc">demo</a>
+        <p></p>
+        <p>
+          Marigold-DC is a zero-shot depth completion frame work. We repurpose Marigold as an off-the-shelf monocular depth estimator and guide it with sparse depth observations.
+        </p>
+      </td>
+    </tr>
+
+
+
+
+
+
+
+		  
             
             <tr onmouseout="marigold_stop()" onmouseover="marigold_start()" bgcolor="#c7eaf2">
               <td style="padding:20px;width:25%;vertical-align:middle">
