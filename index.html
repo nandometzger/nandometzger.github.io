@@ -169,6 +169,58 @@
 
 
 		  
+           
+            <tr onmouseout="marigoldTPAMI_stop()" onmouseover="marigoldTPAMI_start()">
+              <td style="padding:20px;width:25%;vertical-align:middle">
+                <div class="one">
+          <div class="two" id='marigoldTPAMI_image'><video  width=100% height=100% muted autoplay loop>
+          <source src="assets/marigold_pami_512.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video></div>
+          <img src='assets/images/marigold_pami_512_frame0.jpg' width="160">
+        </div>
+        <script type="text/javascript">
+          function marigoldTPAMI_start() {
+            document.getElementById('marigoldTPAMI_image').style.opacity = "1";
+          }
+
+          function marigoldTPAMI_stop() {
+            document.getElementById('marigoldTPAMI_image').style.opacity = "0";
+          }
+          marigoldTPAMI_stop()
+          </script>
+      </td>
+      <td style="padding:20px;width:75%;vertical-align:middle">
+        <a href="https://arxiv.org/abs/2505.09358">
+			<span class="papertitle">Marigold: Affordable Adaptation of Diffusion-Based Image Generators for Image Analysis
+</span>
+</a>
+        <br>
+	<a href="http://www.kebingxin.com/">Bingxin Ke</a>,
+	<a href="https://www.linkedin.com/in/kevin-qu-b3417621b/">Kevin Qu</a>,
+  <a href="https://scholar.google.ch/citations?user=uAAMOnQAAAAJ&hl=en">Tianfu Wang</a>, 
+        <strong>Nando Metzger</strong>, 
+        <a href="https://shengyuh.github.io/">Shengyu Huang</a>,
+  <a href="https://scholar.google.com/citations?user=B_jbDpEAAAAJ&hl=en">Bo Li</a>, 
+	<a href="https://www.obukhov.ai/">Anton Obukhov</a>, 
+        <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>
+
+        <br>
+        <em>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)</em>, 2025 &nbsp <font color="red"><strong></strong></font>
+        <br>
+        <a href="https://arxiv.org/abs/2505.09358">arXiv</a>
+        /
+        <a href="https://github.com/prs-eth/marigold">code</a>
+        /
+        <a href="https://huggingface.co/spaces/prs-eth/marigold">demo</a>
+        <p></p>
+        <p>
+          Marigold (TPAMI) generalizes the original CVPR'24 monocular depth estimator into a diffusion-based foundation model for dense prediction,
+          supporting tasks such as depth, surface normals, and intrinsic image decomposition with only a few diffusion steps and efficient fine-tuning.
+        </p>
+      </td>
+    </tr>
+
             
             <tr onmouseout="marigold_stop()" onmouseover="marigold_start()" bgcolor="#c7eaf2">
               <td style="padding:20px;width:25%;vertical-align:middle">
@@ -648,8 +700,9 @@
                 <td style="padding:20px;width:100%;vertical-align:middle">
                   <h2>News</h2>
                   <ul>
-				    <li>October 2026: I am attending ICCV, presenting Marigold-DC.</li>
-				    <li>April 2025: I started as a Student Researcher at Google in the Team of <a href="https://federicotombari.github.io/">Federico Tombari</a></a>.</li>
+				    <li>20th of November 2025: I am giving a talk at ZurichCV.</li>
+				    <li>October 2025: I am attending ICCV, presenting Marigold-DC.</li>
+				    <li>April 2025: I started as a Student Researcher at Google in the Team of <a href="https://federicotombari.github.io/">Federico Tombari</a>.</li>
 				    <li>17th March 2025: Presentation at <a href="https://eth4d.ethz.ch/news-and-events/events/humanitarian-action-in-the-digital-age.html">Humanitarian Action in the Digital Age</a>.</li>
 				    <li>12th March 2025: Presenter at Helveta's internal Big Data Webinar. </li>
 				    <li>29th November 2024: Presenting POPCORN and POMELO at the ETH4D General Assembly.</li>
