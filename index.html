@@ -182,8 +182,8 @@
         Merlin Alfredsson,
         Emilia Arens,
         <strong>Nando Metzger</strong>,
-        Torben Peters,
-        Linus Scheibenreif,
+        <a href="https://petertor.github.io/">Torben Peters</a>,
+        <a href="https://scheibenreif.github.io/">Linus Scheibenreif</a>,
         <a href="https://scholar.google.ch/citations?user=sxLG1rgAAAAJ&hl=en">Jan Dirk Wegner</a>,
         <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>
         <br>
@@ -203,6 +203,45 @@
     </tr>
 
 		  
+
+    
+    <tr onmouseout="circumpolarLST_stop()" onmouseover="circumpolarLST_start()">
+      <td style="padding:20px;width:25%;vertical-align:middle">
+        <div class="one">
+          <div class="two" id='circumpolarLST_image'>
+            <img src='assets/temp2.png' width=100%>
+          </div>
+          <img src='assets/temp1.png' width="160">
+        </div>
+        <script type="text/javascript">
+          function circumpolarLST_start() {
+            document.getElementById('circumpolarLST_image').style.opacity = "1";
+          }
+
+          function circumpolarLST_stop() {
+            document.getElementById('circumpolarLST_image').style.opacity = "0";
+          }
+          circumpolarLST_stop()
+        </script>
+      </td>
+      <td style="padding:20px;width:75%;vertical-align:middle">
+        <span class="papertitle">Four decades of circumpolar super-resolved satellite land surface temperature data</span>
+        <br>
+        <a href="https://www.geography.unibe.ch/about_us/staff/dupuis_sonia/index_eng.html">Sonia Dupuis</a>,
+        <strong>Nando Metzger</strong>,
+        <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>,
+        Frank Göttsche,
+        Stefan Wunderle
+        <br>
+        <em>arXiv submission</em>, 2025
+        <p></p>
+        <p>
+          We present a 42-year pan-Arctic land surface temperature dataset, downscaled from AVHRR GAC to 1&nbsp;km resolution with a deep anisotropic diffusion super-resolution model trained on MODIS LST and guided by high-resolution land cover, elevation, and vegetation height.
+          The resulting twice-daily, 1&nbsp;km LST record enables improved permafrost and near-surface air temperature modelling, Greenland Ice Sheet surface mass balance assessment, and climate monitoring in the pre-MODIS era.
+        </p>
+      </td>
+    </tr>
+    
            
             <tr onmouseout="marigoldTPAMI_stop()" onmouseover="marigoldTPAMI_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
@@ -457,6 +496,7 @@
         </p>
       </td>
     </tr>
+
 
 
     <tr onmouseout="dada_stop()" onmouseover="dada_start()" bgcolor="#c7eaf2">
