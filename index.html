@@ -167,11 +167,24 @@
 
 
 
-    <tr>
+    <tr onmouseout="damage_stop()" onmouseover="damage_start()">
       <td style="padding:20px;width:25%;vertical-align:middle">
         <div class="one">
+          <div class="two" id='damage_image'>
+            <img src='assets/damage2.png' width=100%>
+          </div>
           <img src='assets/damage.png' width="160">
         </div>
+        <script type="text/javascript">
+          function damage_start() {
+            document.getElementById('damage_image').style.opacity = "1";
+          }
+
+          function damage_stop() {
+            document.getElementById('damage_image').style.opacity = "0";
+          }
+          damage_stop()
+        </script>
       </td>
       <td style="padding:20px;width:75%;vertical-align:middle">
         <a href="https://arxiv.org/abs/2511.05461">
@@ -449,6 +462,44 @@
           </td>
         </tr>
 
+        <tr onmouseout="snow_stop()" onmouseover="snow_start()">
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <div class="one">
+              <div class="two" id='snow_image'>
+                <img src='assets/fog1.png' width=100%>
+              </div>
+              <img src='assets/fog1.png' width="160">
+            </div>
+            <script type="text/javascript">
+              function snow_start() {
+                document.getElementById('snow_image').style.opacity = "1";
+              }
+
+              function snow_stop() {
+                document.getElementById('snow_image').style.opacity = "0";
+              }
+              snow_stop()
+            </script>
+          </td>
+          <td style="padding:20px;width:75%;vertical-align:middle">
+            <span class="papertitle">Automatic Image Compositing and Snow Segmentation for Alpine Snow Cover Monitoring</span>
+            <br>
+            Janik Baumer,
+            <strong>Nando Metzger</strong>,
+            Elisabeth D Hafner,
+            <a href="https://rcdaudt.github.io/">Rodrigo Caye Daudt</a>,
+            <a href="https://scholar.google.ch/citations?user=sxLG1rgAAAAJ&hl=en">Jan Dirk Wegner</a>,
+            <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>
+            <br>
+            <em>IEEE Swiss Conference on Data Science (SDS)</em>, 2023, pages 77–84
+            <p></p>
+            <p>
+              We automate SLF's ground-based snow cover monitoring pipeline in the Dischma valley by combining deep learning-based fog classification with pixel-wise snow segmentation for ground camera imagery.
+              Our approach removes manual thresholds, generalizes across multiple cameras, and enables more scalable, reliable alpine snow cover mapping to support avalanche research and satellite product validation.
+            </p>
+          </td>
+        </tr>
+
 
 
 
@@ -474,25 +525,29 @@
       </td>
       <td style="padding:20px;width:75%;vertical-align:middle">
         <a href="https://github.com/prs-eth/thera">
-			<span class="papertitle">🔥Thera: Neural Fields with Thermal Activations for Arbitrary-Scale Super-Resolution
+			<span class="papertitle">🔥Thera: Aliasing-Free Arbitrary-Scale Super-Resolution with Neural Heat Fields
 </span>
         </a>
         <br>
-	<a href="https://github.com/alebeck">Alexander Becker</a>*, 
-	<a href="https://rcdaudt.github.io/">Rodrigo Caye Daudt</a>*, 
+	<a href="https://github.com/alebeck">Alexander Becker</a>, 
+	<a href="https://rcdaudt.github.io/">Rodrigo Caye Daudt</a>, 
+        Dominik Narnhofer,
+        <a href="https://petertor.github.io/">Torben Peters</a>,
         <strong>Nando Metzger</strong>, 
         <a href="https://scholar.google.ch/citations?user=sxLG1rgAAAAJ&hl=en">Jan Dirk Wegner</a>, 
         <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>
         <br>
-        <em>arXiv</em>, 2023
+        <em>Transactions on Machine Learning Research (TMLR)</em>, 2025
         <br> 
+        <a href="https://therasr.github.io/">project page</a>
+        /
         <a href="https://arxiv.org/abs/2311.17643">arXiv</a>
         /
         <a href="https://github.com/prs-eth/thera">code</a>
         <p></p>
         <p>
-          We present a novel approach for arbitrary-scale single image super-resolution (ASSR) that uses neural fields with an adaptive Gaussian point spread function (PSF) to prevent aliasing and achieve superior results,
-          offering more parameter efficiency and setting a new state of the art while maintaining computational efficiency.
+          We introduce neural heat fields, a neural field formulation that inherently models a physically exact point spread function, enabling analytically correct anti-aliasing at any super-resolution scale without extra computation.
+          Building on this, Thera achieves aliasing-free arbitrary-scale single image super-resolution, substantially outperforming previous methods while remaining parameter-efficient and supported by strong theoretical guarantees.
         </p>
       </td>
     </tr>
