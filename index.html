@@ -49,14 +49,14 @@
                     and
                     <a style="display:inline" href="https://scholar.google.com/citations?user=p3iJiLIAAAAJ&hl=en">Prof.
                       Devis Tuia</a>.
-                    Currently, I am a Student Researcher at Google working on 3D computer vision.
                   </p>
                   <p>
                     I like to work on computer vision problems with various applications such as monocular depth
                     estimation, super-resolution, and remote sensing.
                     I collaborated with the <a style="display:inline" href="https://www.icrc.org/en">ICRC</a> to map
                     vulnerable populations in developing countries.
-                    In the past, I interned and collaborated with <a style="display:inline"
+                    Previously, I was a Student Researcher at Google working on 3D computer vision.
+                    Moreover, I interned and collaborated with <a style="display:inline"
                       href="https://about.meta.com/realitylabs/">Meta's Reality Labs Research</a>.
                   </p>
                   <p>
@@ -72,8 +72,8 @@
                     <a href="https://medium.com/@nandometzger">Medium</a>
                   </p>
                   <p style="text-align:center; color: red;">
-                    I will graduate in February 2026 and am actively seeking full-time opportunities in industry. If
-                    you’re hiring or know of relevant opportunities, I’d love to connect.
+                    I am actively seeking full-time opportunities in industry. If you're hiring or know of relevant
+                    opportunities, I'd love to connect.
                   </p>
                 </td>
                 <td style="padding:2.5%;width:40%;max-width:40%">
@@ -181,6 +181,47 @@
                         Elastic3D is a controllable, end-to-end method for monocular-to-stereo video conversion. Based
                         on latent diffusion with a novel guided VAE decoder, it ensures sharp and epipolar-consistent
                         output while allowing intuitive control over the stereo effect at inference time.
+                      </p>
+                    </td>
+                  </tr>
+
+                  <tr onmouseout="bourbon_stop()" onmouseover="bourbon_start()">
+                    <td style="padding:20px;width:25%;vertical-align:middle">
+                      <div class="one">
+                        <div class="two" id='bourbon_image'>
+                          <img src='assets/images/bourbon_showcase.gif' width="160" height="160"
+                            style="object-fit: cover;">
+                        </div>
+                        <img src='assets/images/bourbon_cover.jpg' width="160" height="160" style="object-fit: cover;">
+                      </div>
+                      <script type="text/javascript">
+                        function bourbon_start() {
+                          document.getElementById('bourbon_image').style.opacity = "1";
+                        }
+
+                        function bourbon_stop() {
+                          document.getElementById('bourbon_image').style.opacity = "0";
+                        }
+                        bourbon_stop()
+                      </script>
+                    </td>
+                    <td style="padding:20px;width:75%;vertical-align:middle">
+                      <a href="https://github.com/nandometzger/bourbon">
+                        <span class="papertitle">Bourbon 🥃: Distilled Population Maps</span>
+                      </a>
+                      <br>
+                      <strong>Nando Metzger</strong>
+                      <br>
+                      <em>GitHub Project</em>, 2026
+                      <br>
+                      <a href="https://github.com/nandometzger/bourbon">code</a>
+                      <p></p>
+                      <p>
+                        Bourbon is a lightweight, distilled version of the POPCORN model for population estimation from
+                        Sentinel-2 satellite imagery only. By "distilling" over several Bag-Of-Popcorns maps into a
+                        compact backbone, Bourbon delivers fast, accurate inference suitable for large-scale mapping. We
+                        also provide an all-in-one version of the model that fetches imagery and performs inference in
+                        one command.
                       </p>
                     </td>
                   </tr>
