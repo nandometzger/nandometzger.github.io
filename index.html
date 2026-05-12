@@ -18,11 +18,29 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FBRP8LCRB"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'G-5FBRP8LCRB');
+</script>
+<script>
+function revealEmail(el) {
+  var email = el.dataset.email.split('').reverse().join('');
+  var parent = el.parentElement;
+  var i = 0;
+  parent.innerHTML = '<span class="email-revealing"></span>';
+  var span = parent.querySelector('.email-revealing');
+  function type() {
+    if (i < email.length) {
+      span.textContent += email[i];
+      i++;
+      setTimeout(type, 40);
+    } else {
+      span.className = '';
+      span.innerHTML = '<a href="mailto:' + email + '">' + email + '</a>';
+    }
+  }
+  type();
+}
 </script>
 
 <body>
@@ -61,7 +79,7 @@
                     specializing in deep learning and computer vision.
                   </p>
                   <p style="text-align:center">
-                    <a href="mailto:nando.metzger@geod.baug.ethz.ch">Email</a> &nbsp;/&nbsp;
+                    <span>***@***.com <a href="#" onclick="revealEmail(this)" data-email="moc.kooltuo@regztem.odnan">[reveal]</a></span> &nbsp;/&nbsp;
                     <a href="https://scholar.google.ch/citations?hl=en&user=pGqbcuIAAAAJ">Scholar</a> &nbsp;/&nbsp;
                     <a href="https://www.linkedin.com/in/nando-metzger-68aa0518b/">LinkedIn</a> &nbsp;/&nbsp;
                     <a href="https://twitter.com/nandometzger">Twitter</a> &nbsp;/&nbsp;
