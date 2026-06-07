@@ -148,6 +148,65 @@ function revealEmail(el) {
 
 
 
+                  <tr onmouseout="pager_stop()" onmouseover="pager_start()" bgcolor="#d1e4ff">
+                    <td style="padding:20px;width:25%;vertical-align:middle">
+                      <div class="one">
+                        <div class="two" id='pager_image'>
+                          <video width="160" height="160" muted autoplay loop style="object-fit: cover;">
+                            <source src="assets/images/pager_teaser.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                        <img src='assets/images/pager_thumbnail.png' width="160" height="160"
+                          style="object-fit: cover;">
+                      </div>
+                      <script type="text/javascript">
+                        function pager_start() {
+                          document.getElementById('pager_image').style.opacity = "1";
+                        }
+
+                        function pager_stop() {
+                          document.getElementById('pager_image').style.opacity = "0";
+                        }
+                        pager_stop()
+                      </script>
+                    </td>
+                    <td style="padding:20px;width:75%;vertical-align:middle">
+                      <a href="https://pager360.github.io/">
+                        <span class="papertitle">📟 PaGeR: Unified Panoramic Geometry Estimation via Multi-View
+                          Foundation Models</span>
+                      </a>
+                      <br>
+                      Vukasin Bozic,
+                      Isidora Slavkovic,
+                      Dominik Narnhofer,
+                      <strong>Nando Metzger</strong>,
+                      Denis Rozumny,
+                      <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a>,
+                      Nikolai Kalischek
+                      <br>
+                      <em>arXiv preprint</em>, 2026
+                      <br>
+                      <a href="https://pager360.github.io/">project page</a>
+                      /
+                      <a href="https://arxiv.org/abs/2605.26368">arXiv</a>
+                      /
+                      <a href="https://github.com/prs-eth/PaGeR">code</a>
+                      /
+                      <a href="https://huggingface.co/spaces/prs-eth/PaGeR">demo</a>
+                      /
+                      <a href="https://huggingface.co/collections/prs-eth/pager-697241d06b3733a6f18e4d39">models</a>
+                      <p></p>
+                      <p>
+                        PaGeR lifts powerful 3D foundation models built for perspective images into the panorama
+                        domain, recovering a full 360° scene from a single panoramic image. Starting from a pretrained
+                        3D-reconstruction transformer and mixing perspective and panoramic images during training, it
+                        predicts scale-invariant depth, metric depth, surface normals, and sky masks in a single
+                        forward pass — reaching state-of-the-art, zero-shot performance both indoors and outdoors.
+                      </p>
+                    </td>
+                  </tr>
+
                   <tr onmouseout="elastic3d_stop()" onmouseover="elastic3d_start()" bgcolor="#c7eaf2">
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
