@@ -261,6 +261,48 @@ function revealEmail(el) {
                     </td>
                   </tr>
 
+                  <tr onmouseout="metalgauss_stop()" onmouseover="metalgauss_start()">
+                    <td style="padding:20px;width:25%;vertical-align:middle">
+                      <div class="one">
+                        <div class="two" id='metalgauss_image'>
+                          <img src='assets/images/metalgauss_showcase.gif' width="160" height="160"
+                            style="object-fit: cover;">
+                        </div>
+                        <img src='assets/images/metalgauss_cover.jpg' width="160" height="160"
+                          style="object-fit: cover;">
+                      </div>
+                      <script type="text/javascript">
+                        function metalgauss_start() {
+                          document.getElementById('metalgauss_image').style.opacity = "1";
+                        }
+
+                        function metalgauss_stop() {
+                          document.getElementById('metalgauss_image').style.opacity = "0";
+                        }
+                        metalgauss_stop()
+                      </script>
+                    </td>
+                    <td style="padding:20px;width:75%;vertical-align:middle">
+                      <a href="https://github.com/nandometzger/metal-gauss">
+                        <span class="papertitle">Metal-Gauss 🤘: 3D Gaussian Splatting on Apple Silicon</span>
+                      </a>
+                      <br>
+                      <strong>Nando Metzger</strong>
+                      <br>
+                      <em>GitHub Project</em>, 2026
+                      <br>
+                      <a href="https://github.com/nandometzger/metal-gauss">code</a>
+                      <p></p>
+                      <p>
+                        Metal-Gauss trains 3D Gaussian Splatting natively on Apple Silicon: a fused forward+backward
+                        rasteriser written in Metal and compiled at runtime, so there is no CUDA and no Xcode. Across
+                        all eight NeRF-synthetic scenes, scored by a single evaluator on the official test split, it
+                        reaches 31.9 dB in about 6 minutes where the strongest competitor needs 28 minutes to reach
+                        29.2. Hover to watch it converge against the wall-clock.
+                      </p>
+                    </td>
+                  </tr>
+
                   <tr onmouseout="bourbon_stop()" onmouseover="bourbon_start()">
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
