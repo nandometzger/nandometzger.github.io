@@ -10,6 +10,51 @@
   <meta name="author" content="Nando Metzger">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
+  <meta name="description" content="Nando Metzger is a computer vision researcher working on generative novel view synthesis, 4D reconstruction, depth estimation, super-resolution and neural rendering. Publications at CVPR, ICCV, NeurIPS, TPAMI and ISPRS.">
+  <link rel="canonical" href="https://nandometzger.github.io/">
+
+  <!-- Social preview: how the link renders on LinkedIn, X, Slack, Bluesky. -->
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Nando Metzger">
+  <meta property="og:title" content="Nando Metzger - Computer Vision Researcher">
+  <meta property="og:description" content="Nando Metzger is a computer vision researcher working on generative novel view synthesis, 4D reconstruction, depth estimation, super-resolution and neural rendering. Publications at CVPR, ICCV, NeurIPS, TPAMI and ISPRS.">
+  <meta property="og:url" content="https://nandometzger.github.io/">
+  <meta property="og:image" content="https://nandometzger.github.io/assets/images/Nando_Portrait.jpg">
+  <meta property="profile:first_name" content="Nando">
+  <meta property="profile:last_name" content="Metzger">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@nandometzger">
+  <meta name="twitter:creator" content="@nandometzger">
+  <meta name="twitter:title" content="Nando Metzger - Computer Vision Researcher">
+  <meta name="twitter:description" content="Nando Metzger is a computer vision researcher working on generative novel view synthesis, 4D reconstruction, depth estimation, super-resolution and neural rendering. Publications at CVPR, ICCV, NeurIPS, TPAMI and ISPRS.">
+  <meta name="twitter:image" content="https://nandometzger.github.io/assets/images/Nando_Portrait.jpg">
+
+  <!-- Person entity: lets search engines tie the name to these profiles
+       explicitly instead of inferring it from link text. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nando Metzger",
+    "givenName": "Nando",
+    "familyName": "Metzger",
+    "url": "https://nandometzger.github.io/",
+    "image": "https://nandometzger.github.io/assets/images/Nando_Portrait.jpg",
+    "jobTitle": "Computer Vision Researcher",
+    "worksFor": { "@type": "Organization", "name": "Athlence Sports" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "ETH Zurich" },
+    "knowsAbout": ["Computer Vision", "3D Reconstruction", "Gaussian Splatting",
+                   "Depth Estimation", "Super-Resolution", "Neural Rendering",
+                   "Remote Sensing", "Diffusion Models"],
+    "sameAs": [
+      "https://scholar.google.ch/citations?hl=en&user=pGqbcuIAAAAJ",
+      "https://github.com/nandometzger",
+      "https://www.linkedin.com/in/nando-metzger-68aa0518b/",
+      "https://twitter.com/nandometzger",
+      "https://medium.com/@nandometzger"
+    ]
+  }
+  </script>
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
 </head>
@@ -54,9 +99,9 @@ function revealEmail(el) {
             <tbody>
               <tr style="padding:0px">
                 <td style="padding:2.5%;width:63%;vertical-align:middle">
-                  <p class="name" style="text-align: center;">
+                  <h1 class="name" style="text-align: center;">
                     Nando Metzger
-                  </p>
+                  </h1>
                   <p>
                     I am a Computer Vision Researcher at Athlence Sports, working on generative novel view synthesis
                     and 4D reconstruction. More broadly, I work on computer vision and dense geometric perception, with
@@ -103,23 +148,23 @@ function revealEmail(el) {
             <tr>
               <td width="10%" valign="middle">
                 <a href="https://ethz.ch/en.html"><img style="width:100%;max-width:100%;object-fit: cover;"
-                    src="assets/images/eth_logo.png"></a>
+                    src="assets/images/eth_logo.png" alt="ETH Zurich logo"></a>
               </td>
               <td width="5%" valign="middle">
                 <a href="https://prs.igp.ethz.ch/"><img style="width:100%;max-width:100%;object-fit: cover;"
-                    src="assets/images/ICRC_logo.png"></a>
-                <!--                 <a href="https://prs.igp.ethz.ch/"><img style="width:100%;max-width:100%;object-fit: cover;" src="assets/images/prslogo_only.jpg""></a> -->
+                    src="assets/images/ICRC_logo.png" alt="ICRC logo"></a>
+                <!--                 <a href="https://prs.igp.ethz.ch/"><img style="width:100%;max-width:100%;object-fit: cover;" src="assets/images/prslogo_only.jpg"" alt="prslogo only logo"></a> -->
               </td>
               <td width="10%" valign="middle">
                 <a href="https://about.meta.com/"><img style="width:100%;max-width:100%;object-fit: cover;"
-                    src="assets/images/meta_logo.png"></a>
+                    src="assets/images/meta_logo.png" alt="Meta logo"></a>
               </td>
               <!--               <td width="5%" valign="middle">
-                <a href="https://about.meta.com/"><img style="width:100%;max-width:100%;object-fit: cover;" src="assets/images/Reality_Labs_logo.svg.png"></a>
+                <a href="https://about.meta.com/"><img style="width:100%;max-width:100%;object-fit: cover;" src="assets/images/Reality_Labs_logo.svg.png" alt="Reality Labs logo.svg logo"></a>
               </td>  -->
               <td width="10%" valign="middle">
                 <a href="https://research.google//"><img style="width:100%;max-width:100%;object-fit: cover;"
-                    src="assets/images/GoogleLogo.png"></a>
+                    src="assets/images/GoogleLogo.png" alt="Google logo"></a>
               </td>
             </tr>
           </table>
@@ -156,10 +201,10 @@ function revealEmail(el) {
                       <div class="one">
                         <div class="two" id='metalgauss_image'>
                           <img src='assets/images/metalgauss_showcase.gif' width="160" height="160"
-                            style="object-fit: cover;">
+                            style="object-fit: cover;" alt="Metal-Gauss 🤘 teaser">
                         </div>
                         <img src='assets/images/metalgauss_cover.jpg' width="160" height="160"
-                          style="object-fit: cover;">
+                          style="object-fit: cover;" alt="Metal-Gauss 🤘 teaser">
                       </div>
                       <script type="text/javascript">
                         function metalgauss_start() {
@@ -203,7 +248,7 @@ function revealEmail(el) {
                           </video>
                         </div>
                         <img src='assets/images/pager_thumbnail.png' width="160" height="160"
-                          style="object-fit: cover;">
+                          style="object-fit: cover;" alt="PaGeR teaser">
                       </div>
                       <script type="text/javascript">
                         function pager_start() {
@@ -262,7 +307,7 @@ function revealEmail(el) {
                           </video>
                         </div>
                         <img src='assets/images/elastic3d_thumbnail.jpg' width="160" height="160"
-                          style="object-fit: cover;">
+                          style="object-fit: cover;" alt="Elastic3D teaser">
                       </div>
                       <script type="text/javascript">
                         function elastic3d_start() {
@@ -308,9 +353,9 @@ function revealEmail(el) {
                       <div class="one">
                         <div class="two" id='bourbon_image'>
                           <img src='assets/images/bourbon_showcase.gif' width="160" height="160"
-                            style="object-fit: cover;">
+                            style="object-fit: cover;" alt="Bourbon 🥃 teaser">
                         </div>
-                        <img src='assets/images/bourbon_cover.jpg' width="160" height="160" style="object-fit: cover;">
+                        <img src='assets/images/bourbon_cover.jpg' width="160" height="160" style="object-fit: cover;" alt="Bourbon 🥃 teaser">
                       </div>
                       <script type="text/javascript">
                         function bourbon_start() {
@@ -348,9 +393,9 @@ function revealEmail(el) {
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
                         <div class="two" id='damage_image'>
-                          <img src='assets/damage2.png' width=100%>
+                          <img src='assets/damage2.png' width=100% alt="The Potential of Copernicus Satellites for Disaster Response teaser">
                         </div>
-                        <img src='assets/damage.png' width="160">
+                        <img src='assets/damage.png' width="160" alt="The Potential of Copernicus Satellites for Disaster Response teaser">
                       </div>
                       <script type="text/javascript">
                         function damage_start() {
@@ -404,7 +449,7 @@ function revealEmail(el) {
                           </video>
                         </div>
                         <img src='assets/images/ml_bokeh_thumbnail.jpg' width="160" height="160"
-                          style="object-fit: cover;">
+                          style="object-fit: cover;" alt="ML-Bokeh teaser">
                       </div>
                       <script type="text/javascript">
                         function bokeh_start() {
@@ -446,7 +491,7 @@ function revealEmail(el) {
                             <source src="assets/images/marigold_dc_video.webm" type="video/mp4">
                             Your browser does not support the video tag.
                           </video></div>
-                        <img src='assets/images/marigolddc_logo_square.jpg' width="160">
+                        <img src='assets/images/marigolddc_logo_square.jpg' width="160" alt="Marigold-DC teaser">
                       </div>
                       <script type="text/javascript">
                         function marigoldDC_start() {
@@ -503,9 +548,9 @@ function revealEmail(el) {
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
                         <div class="two" id='circumpolarLST_image'>
-                          <img src='assets/temp2.png' width=100%>
+                          <img src='assets/temp2.png' width=100% alt="Four decades of circumpolar super-resolved satellite land surface temperature data teaser">
                         </div>
-                        <img src='assets/temp1.png' width="160">
+                        <img src='assets/temp1.png' width="160" alt="Four decades of circumpolar super-resolved satellite land surface temperature data teaser">
                       </div>
                       <script type="text/javascript">
                         function circumpolarLST_start() {
@@ -554,7 +599,7 @@ function revealEmail(el) {
                             <source src="assets/marigold_pami_512.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                           </video></div>
-                        <img src='assets/images/marigold_pami_512_frame0.jpg' width="160">
+                        <img src='assets/images/marigold_pami_512_frame0.jpg' width="160" alt="Marigold teaser">
                       </div>
                       <script type="text/javascript">
                         function marigoldTPAMI_start() {
@@ -610,7 +655,7 @@ function revealEmail(el) {
                             <source src="assets/images/thera_zebra.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                           </video></div>
-                        <img src='assets/images/thera_zebra_cover.png' width="160">
+                        <img src='assets/images/thera_zebra_cover.png' width="160" alt="Thera teaser">
                       </div>
                       <script type="text/javascript">
                         function thera_start() {
@@ -663,7 +708,7 @@ function revealEmail(el) {
                             <source src="assets/images/marigold_rec.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                           </video></div>
-                        <img src='assets/images/splashdog_sq.png' width="160">
+                        <img src='assets/images/splashdog_sq.png' width="160" alt="Repurposing Diffusion-Based Image Generators for Monocular Depth Estimation teaser">
                       </div>
                       <script type="text/javascript">
                         function marigold_start() {
@@ -719,9 +764,9 @@ function revealEmail(el) {
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
                         <div class="two" id='betterdepth_image'>
-                          <img src='assets/BetterDepth_depth.png' width=100%>
+                          <img src='assets/BetterDepth_depth.png' width=100% alt="BetterDepth teaser">
                         </div>
-                        <img src='assets/BetterDepth_cat.png' width="160">
+                        <img src='assets/BetterDepth_cat.png' width="160" alt="BetterDepth teaser">
                       </div>
                       <script type="text/javascript">
                         function betterdepth_start() {
@@ -772,7 +817,7 @@ function revealEmail(el) {
                             <source src="assets/images/popcorn_rec.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                           </video></div>
-                        <img src='assets/images/popcorn_preview.png' width=100%>
+                        <img src='assets/images/popcorn_preview.png' width=100% alt="POPCORN teaser">
                       </div>
                       <script type="text/javascript">
                         function popcorn_start() {
@@ -821,9 +866,9 @@ function revealEmail(el) {
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
                         <div class="two" id='snow_image'>
-                          <img src='assets/fog1.png' width=100%>
+                          <img src='assets/fog1.png' width=100% alt="Automatic Image Compositing and Snow Segmentation for Alpine Snow Cover Monitoring teaser">
                         </div>
-                        <img src='assets/fog2.png' width="160">
+                        <img src='assets/fog2.png' width="160" alt="Automatic Image Compositing and Snow Segmentation for Alpine Snow Cover Monitoring teaser">
                       </div>
                       <script type="text/javascript">
                         function snow_start() {
@@ -877,7 +922,7 @@ function revealEmail(el) {
                             <source src="assets/images/diffusion_vid.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                           </video></div>
-                        <img src='assets/images/dada_sq.png' width=100%>
+                        <img src='assets/images/dada_sq.png' width=100% alt="DADA teaser">
                       </div>
                       <script type="text/javascript">
                         function dada_start() {
@@ -933,7 +978,7 @@ function revealEmail(el) {
                             <source src="assets/images/stone_tagged2.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                           </video></div>
-                        <img src='assets/images/stone_tagged2.png' width=100%>
+                        <img src='assets/images/stone_tagged2.png' width=100% alt="MLFocalLengths teaser">
                       </div>
                       <script type="text/javascript">
                         function MLfocal_start() {
@@ -972,7 +1017,7 @@ function revealEmail(el) {
                   <tr>
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
-                                                <img src='assets/images/forecasting.png' width=100%>
+                                                <img src='assets/images/forecasting.png' width=100% alt="Urban Change Forecasting from Satellite Images teaser">
                       </div>
                                           </td>
                     <td style="padding:20px;width:75%;vertical-align:middle">
@@ -999,7 +1044,7 @@ function revealEmail(el) {
                   <tr>
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
-                                                <img src='assets/images/pomelo_map2.png' width=100%>
+                                                <img src='assets/images/pomelo_map2.png' width=100% alt="POMELO teaser">
                       </div>
                                           </td>
                     <td style="padding:20px;width:75%;vertical-align:middle">
@@ -1043,7 +1088,7 @@ function revealEmail(el) {
                   <tr>
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
-                                                <img src='assets/images/ODERNN.png' width=100%>
+                                                <img src='assets/images/ODERNN.png' width=100% alt="Crop Classification under Varying Cloud Cover with Neural Ordinary Differential Equations teaser">
                       </div>
                                           </td>
                     <td style="padding:20px;width:75%;vertical-align:middle">
@@ -1077,7 +1122,7 @@ function revealEmail(el) {
                   <tr>
                     <td style="padding:20px;width:25%;vertical-align:middle">
                       <div class="one">
-                                                <img src='assets/images/DSMref.png' width=100%>
+                                                <img src='assets/images/DSMref.png' width=100% alt="DSM Refinement with Deep Encoder-Decoder Networks teaser">
                       </div>
                                           </td>
                     <td style="padding:20px;width:75%;vertical-align:middle">
