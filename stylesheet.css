@@ -345,14 +345,20 @@ table.cards {
   table-layout: fixed;
 }
 
+/* No rules between rows. With a centred mark, a bold organisation name
+   and a muted third line, the grouping is already legible; the gap just
+   has to be big enough to read as a gap. */
 table.exp td {
   vertical-align: top;
-  padding: 14px 0;
-  border-top: 1px solid #f0f0f0;
+  padding: 20px 0;
 }
 
 table.exp tr:first-child td {
-  border-top: 0;
+  padding-top: 8px;
+}
+
+table.exp tr:last-child td {
+  padding-bottom: 8px;
 }
 
 /* `table.exp td` sets padding and outranks a bare class selector, so the
@@ -400,25 +406,22 @@ table.exp td.exp-date {
    about 16px the wordmark inside the box stops being legible. */
 .exp-logo img[src*="barry"]     { height: 17px; }
 
-/* Talks reuse the same 132px + 30px column so the left spine holds. */
-table.talks {
-  table-layout: fixed;
+/* A list, not a table. The year is an inline-block of fixed width so the
+   years still line up without any rules or cells. */
+ul.talks {
+  list-style: none;
+  margin: 4px 0 0 0;
+  padding: 0;
 }
 
-table.talks td {
-  vertical-align: top;
-  padding: 7px 0;
-  border-top: 1px solid #f4f4f4;
+ul.talks li {
+  padding: 5px 0;
 }
 
-table.talks tr:first-child td {
-  border-top: 0;
-}
-
-.talk-year {
-  width: 132px;
-  padding-right: 30px;
-  color: #666;
+ul.talks .talk-year {
+  display: inline-block;
+  width: 62px;
+  color: #777;
 }
 
 .exp-note {
@@ -489,12 +492,10 @@ table.talks tr:first-child td {
 
   table.exp tr {
     display: block;
-    border-top: 1px solid #f0f0f0;
-    padding: 12px 0;
+    padding: 16px 0;
   }
 
   table.exp tr:first-child {
-    border-top: 0;
     padding-top: 0;
   }
 
@@ -507,8 +508,11 @@ table.talks tr:first-child td {
     border-top: 0;
   }
 
+  /* Once the row is stacked, a centred mark over left-aligned text reads
+     as a mistake; the whole block goes left. */
   table.exp td.exp-logo {
     margin-bottom: 8px;
+    text-align: left;
   }
 
   table.exp td.exp-logo img {
@@ -522,12 +526,13 @@ table.talks tr:first-child td {
 }
 
 @media (max-width: 560px) {
-  table.talks {
-    table-layout: auto;
+  ul.talks .talk-year {
+    display: block;
+    width: auto;
+    font-size: 12px;
   }
 
-  .talk-year {
-    width: 54px;
-    padding-right: 14px;
+  ul.talks li {
+    padding: 7px 0;
   }
 }
