@@ -57,7 +57,7 @@
     ]
   }
   </script>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=082b8175">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=5dfefc5d">
 
 </head>
 
@@ -1161,8 +1161,7 @@ function revealEmail(el) {
         window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
       // Teasers are inert until hovered: nothing downloads or plays otherwise.
-      Array.prototype.forEach.call(document.querySelectorAll('tr.card, .portrait'), function (row) {
-        if (row === portrait && (live || reduced)) return;   // light field, or nothing at all
+      Array.prototype.forEach.call(document.querySelectorAll('tr.card'), function (row) {
         var overlay = row.querySelector('.two') || row.querySelector('video');
         if (!overlay) return;
         overlay.style.opacity = '0';
@@ -1177,7 +1176,69 @@ function revealEmail(el) {
         });
       });
 
-      if (!live) return;
+      if (!portrait || reduced) return;   // reduced motion: the still, and nothing else
+
+      if (!live) {
+        // No hover to answer, so the clip is tapped instead -- and the portrait
+        // has to say so, because a photograph that happens to be a
+        // reconstruction gives no sign of it. Hovering could be discovered by
+        // accident; tapping cannot.
+        var clip = portrait.querySelector('video');
+        var tip = portrait.querySelector('.lf-hint');
+        if (!clip) return;
+        clip.style.opacity = '0';
+        portrait.classList.add('tappable');
+        if (tip) tip.textContent = 'tap for 3D';
+
+        // Driven by the video's own events, not by the click. preload is
+        // "none", so the first tap has to fetch 207 kB before anything can
+        // play: hiding the hint on the click itself left the portrait blank
+        // with no prompt for as long as that took, and left it that way for
+        // good if play() rejected.
+        function show(on) {
+          clip.style.opacity = on ? '1' : '0';
+          if (tip) tip.style.opacity = on ? '0' : '1';
+        }
+        show(false);
+        clip.addEventListener('playing', function () { show(true); });
+        clip.addEventListener('pause', function () { show(false); });
+        var pending = false;
+
+        function start() {
+          var r = clip.play();
+          if (r && r.catch) r.catch(function () {
+            // preload is "none", so the very first tap can land before there
+            // is anything to play and play() rejects. Without this the first
+            // tap did nothing and it took a second one to start the clip.
+            if (pending) return;
+            show(false);
+            if (clip.readyState >= 2) {
+              // Already loaded by the time the rejection arrived, so waiting
+              // for canplay would wait for an event that has been and gone.
+              var r2 = clip.play();
+              if (r2 && r2.catch) r2.catch(function () { show(false); });
+              return;
+            }
+            pending = true;
+            clip.addEventListener('canplay', function again() {
+              clip.removeEventListener('canplay', again);
+              pending = false;
+              var r3 = clip.play();
+              if (r3 && r3.catch) r3.catch(function () { show(false); });
+            });
+          });
+        }
+
+        portrait.addEventListener('click', function () {
+          if (clip.paused) {
+            start();
+          } else {
+            clip.pause();
+            clip.currentTime = 0;
+          }
+        });
+        return;
+      }
 
       // The portrait is a light field, not a clip: 576 views pre-rendered over
       // four sheets, so the pointer moves a real camera around the

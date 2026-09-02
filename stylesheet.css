@@ -302,6 +302,12 @@ h2 {
   cursor: grabbing;
 }
 
+/* Touch: the clip is tapped, not hovered. */
+.portrait.tappable {
+  cursor: pointer;
+  -webkit-touch-callout: none;
+}
+
 .portrait .lf {
   position: absolute;
   inset: 0;
@@ -643,6 +649,13 @@ ul.talks .talk-year {
     max-width: 124px;
   }
 
+  /* The portrait is 104-124px here, so the hint has to come down with it or
+     it runs out of the circle. */
+  .portrait .lf-hint {
+    font-size: 10px;
+    bottom: 7%;
+  }
+
   .name {
     font-size: 30px;
   }
@@ -716,6 +729,11 @@ ul.talks .talk-year {
   .hero-photo {
     width: 104px;
     margin-left: 14px;
+  }
+
+  .portrait .lf-hint {
+    font-size: 9.5px;
+    letter-spacing: 0;
   }
 
   .hero-photo .portrait {
