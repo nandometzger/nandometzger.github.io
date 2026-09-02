@@ -420,8 +420,27 @@ details.more > summary:hover {
 
 .card-media {
   width: 132px;
-  padding: 14px 30px 14px 0;
+  /* The 13px on the left is a gutter that exists so the accent rule on an
+     awarded paper has somewhere to live. Every card carries it, awarded or
+     not, so the thumbnails stay on one line down the page. */
+  padding: 14px 30px 14px 13px;
+  position: relative;
   vertical-align: top;
+}
+
+/* Papers with an award or a highlight get a rule down their left edge. It
+   marks the same handful of entries the red tag marks, but from the margin,
+   so the eye can find them while skimming instead of having to read each
+   venue line. Orange is the accent already in the stylesheet. */
+tr.card.flagged .card-media::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 16px;
+  bottom: 16px;
+  width: 3px;
+  border-radius: 2px;
+  background: #f09228;
 }
 
 /* The metadata block (authors, venue, contribution, links) is set tighter
@@ -641,7 +660,7 @@ ul.talks .talk-year {
   .card-media {
     width: 104px !important;
     max-width: 104px !important;
-    padding: 14px 16px 14px 0 !important;
+    padding: 14px 16px 14px 11px !important;
   }
 
   .card-media .one,
@@ -705,7 +724,7 @@ ul.talks .talk-year {
   .card-media {
     width: 88px !important;
     max-width: 88px !important;
-    padding-right: 12px !important;
+    padding: 14px 12px 14px 9px !important;
   }
 
   .card-media .one,
