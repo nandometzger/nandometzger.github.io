@@ -57,7 +57,7 @@
     ]
   }
   </script>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=a979adef">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=1d18db31">
 
 </head>
 
@@ -145,8 +145,12 @@ function revealEmail(el) {
                     <img src="./assets/images/Nando_Portrait.jpg" alt="Nando Metzger">
                     <div class="lf" aria-hidden="true">
                       <img class="lf-sheet" alt="">
+                      <img class="lf-sheet" alt="">
+                      <img class="lf-sheet" alt="">
+                      <img class="lf-sheet" alt="">
                       <img class="lf-strip" alt="">
                     </div>
+                    <canvas class="lf-scan" width="512" height="512" aria-hidden="true"></canvas>
                     <span class="lf-hint" aria-hidden="true">drag to pull focus</span>
                     <video muted loop playsinline preload="none" aria-hidden="true">
                       <source src="assets/images/portrait_3d.mp4" type="video/mp4">
@@ -1130,10 +1134,17 @@ function revealEmail(el) {
 
   <script>
     (function () {
-      var GRID = 16;      // views per axis on portrait_lf.jpg
-      var STEPS = 24;     // focus steps on portrait_focus.jpg
-      var EASE = 0.2;     // pointer smoothing; the raw pointer strobes between tiles
-      var DRAG_PX = 14;   // pixels of drag per focus step
+      var GRID = 24, SPLIT = 2, PER = GRID / SPLIT;   // 24x24 views, 2x2 sheets
+      var STEPS = 24, FCOLS = 6, FROWS = 4;           // focus strip layout
+      var EASE = 0.2;      // pointer smoothing; the raw pointer strobes between tiles
+      var DRAG_PX = 12;    // pixels of drag per focus step
+      var SCAN_MS = 300;   // the iso-depth sweep on arrival
+      var DEPTH_PX = 512;
+      // NEAR and FAR_MAP are the depth map's own bounds, printed by the render
+      // script; FAR_FOCUS is where the focus strip stops.
+      var NEAR = 1.8783, FAR_MAP = 13.4814, FAR_FOCUS = 6.0;
+      var FOCUS_NEAR = 2.13;   // the strip starts on the face, not at NEAR
+      var BASE = 'assets/images/';
 
       var portrait = document.querySelector('.portrait');
       // Touch has no hover to answer, so it keeps the small clip that was
@@ -1161,38 +1172,40 @@ function revealEmail(el) {
 
       if (!live) return;
 
-      // The portrait is a light field, not a clip: 256 views pre-rendered on
-      // one sheet, so the pointer moves a real camera around the
+      // The portrait is a light field, not a clip: 576 views pre-rendered over
+      // four sheets, so the pointer moves a real camera around the
       // reconstruction. Every view was rendered looking AT the face, which is
       // what keeps the head pinned while the background slides.
       var lf = portrait.querySelector('.lf');
-      var sheet = portrait.querySelector('.lf-sheet');
+      var sheets = Array.prototype.slice.call(portrait.querySelectorAll('.lf-sheet'));
       var strip = portrait.querySelector('.lf-strip');
+      var scan = portrait.querySelector('.lf-scan');
       var hint = portrait.querySelector('.lf-hint');
-      if (!lf || !sheet || !strip) return;
+      if (!lf || sheets.length !== SPLIT * SPLIT || !strip) return;
 
       portrait.removeAttribute('title');   // the hint says it better, and in place
       portrait.classList.add('live');
 
-      var ready = false, inside = false, dragging = false, hinted = false;
+      var inside = false, dragging = false, hinted = false, shown = -1;
       var tx = 0.5, ty = 0.5, cx = 0.5, cy = 0.5, drag = 0, raf = 0, px = 0, py = 0;
+
+      // ---- views --------------------------------------------------------
 
       function paintView() {
         var i = Math.round(cx * (GRID - 1));
         var j = Math.round(cy * (GRID - 1));
-        sheet.style.transform =
-          'translate3d(' + (-i * 100 / GRID) + '%,' + (-j * 100 / GRID) + '%,0)';
-      }
-
-      function paintFocus() {
-        // Ping-pong, so one continuous drag racks out to the far plane and back
-        // with no jump at either end. The strip therefore holds 24 distinct
-        // depths rather than 48 frames of a there-and-back loop.
-        var period = 2 * (STEPS - 1);
-        var k = Math.round(drag / DRAG_PX) % period;
-        if (k < 0) k += period;
-        if (k >= STEPS) k = period - k;
-        strip.style.transform = 'translate3d(' + (-k * 100 / STEPS) + '%,0,0)';
+        var n = ((j / PER) | 0) * SPLIT + ((i / PER) | 0);
+        var img = sheets[n];
+        img.style.transform = 'translate3d(' + (-(i % PER) * 100 / PER) + '%,' +
+                                               (-(j % PER) * 100 / PER) + '%,0)';
+        if (n !== shown) {
+          if (shown >= 0) sheets[shown].classList.remove('on');
+          img.classList.add('on');
+          shown = n;
+        }
+        // A sheet that has not decoded yet is a blank circle, so hold the
+        // photograph until it has.
+        lf.style.opacity = (img.complete && img.naturalWidth) ? '1' : '0';
       }
 
       function tick() {
@@ -1205,6 +1218,183 @@ function revealEmail(el) {
         }
       }
 
+      // ---- focus --------------------------------------------------------
+
+      // The strip is spaced uniformly in INVERSE depth and the depth map is
+      // stored in it, so a focus step maps straight onto a level of the map and
+      // the glow can sit exactly on whatever is sharp.
+      var focusLevel = [];
+      for (var k = 0; k < STEPS; k++) {
+        var f = k / (STEPS - 1);
+        var inv = (1 - f) / FOCUS_NEAR + f / FAR_FOCUS;
+        focusLevel.push(Math.round(255 * (inv - 1 / FAR_MAP) / (1 / NEAR - 1 / FAR_MAP)));
+      }
+
+      function focusStep() {
+        // Ping-pong, so one continuous drag racks out and back with no jump at
+        // either end. The strip therefore holds 24 distinct depths rather than
+        // 48 frames of a there-and-back loop.
+        var period = 2 * (STEPS - 1);
+        var i = Math.round(drag / DRAG_PX) % period;
+        if (i < 0) { i += period; }
+        return i < STEPS ? i : period - i;
+      }
+
+      function paintFocus() {
+        var i = focusStep();
+        strip.style.transform = 'translate3d(' + (-(i % FCOLS) * 100 / FCOLS) + '%,' +
+                                                 (-((i / FCOLS) | 0) * 100 / FROWS) + '%,0)';
+        scan.style.opacity = '1';
+        // 11 levels is not a look, it is the depth of field. The map is stored
+        // in inverse depth, so a fixed number of levels is a fixed interval in
+        // 1/z, which is exactly the criterion for a bounded circle of
+        // confusion: at this aperture it works out at about 0.7 px of blur.
+        // So the glow marks what is genuinely sharp, and correctly shows
+        // almost nothing once focus leaves the subject -- there is nothing in
+        // this scene between the shoulder at 2.4 m and the wall at 9.5.
+        band(focusLevel[i], 11, 0.24);
+      }
+
+      // ---- the depth scan -------------------------------------------------
+
+      var ctx = null, buf = null, order = null, start = null, lastLo = -1, lastHi = -1;
+      var sweepAt = null;   // fraction of the sweep -> depth level
+
+      function initScan(img) {
+        var probe = document.createElement('canvas');
+        probe.width = probe.height = DEPTH_PX;
+        var pg = probe.getContext('2d', { willReadFrequently: true });
+        pg.drawImage(img, 0, 0, DEPTH_PX, DEPTH_PX);
+        var d;
+        try { d = pg.getImageData(0, 0, DEPTH_PX, DEPTH_PX).data; }
+        catch (err) { return; }                  // tainted canvas: no scan, no harm
+        // Counting-sort every pixel by its depth level. A band then touches the
+        // one per cent of pixels inside it instead of all 262144, and clearing
+        // walks the same list, so the sweep costs almost nothing per frame.
+        var n = DEPTH_PX * DEPTH_PX, p, v;
+        var lev = new Uint8Array(n), hist = new Int32Array(256);
+        for (p = 0; p < n; p++) { v = d[p * 4]; lev[p] = v; hist[v]++; }
+        start = new Int32Array(257);
+        for (v = 0; v < 256; v++) { start[v + 1] = start[v] + hist[v]; }
+        var cursor = start.slice(0, 256);
+        order = new Int32Array(n);
+        for (p = 0; p < n; p++) { order[cursor[lev[p]]++] = p; }
+        // The sweep runs through equal numbers of PIXELS, not equal levels.
+        // This scene is bimodal -- subject at levels ~150-255, wall at 0-18,
+        // and almost nothing in between -- so a sweep at constant level would
+        // cross the subject, then stall over an empty half of the range, then
+        // flash the wall. Walking the cumulative histogram instead keeps the
+        // band moving over something the whole time.
+        sweepAt = new Uint8Array(129);
+        for (var q = 0, lvl = 255; q < sweepAt.length; q++) {
+          var want = n * q / (sweepAt.length - 1);
+          while (lvl > 0 && n - start[lvl] < want) lvl--;
+          sweepAt[q] = lvl;
+        }
+        var g = scan.getContext('2d');
+        buf = g.createImageData(DEPTH_PX, DEPTH_PX);
+        ctx = g;
+      }
+
+      function wipe() {
+        if (lastLo < 0) return;
+        var data = buf.data;
+        for (var k = start[lastLo]; k < start[lastHi + 1]; k++) { data[order[k] * 4 + 3] = 0; }
+        lastLo = lastHi = -1;
+      }
+
+      function band(centre, half, peak) {
+        if (!ctx) return;
+        var data = buf.data, k, o, a, w, v;
+        wipe();
+        var lo = Math.max(0, centre - half), hi = Math.min(255, centre + half);
+        for (v = lo; v <= hi; v++) {
+          w = 1 - Math.abs(v - centre) / (half + 1);
+          a = peak * w * w * (3 - 2 * w) * 255;
+          for (k = start[v]; k < start[v + 1]; k++) {
+            o = order[k] * 4;
+            data[o] = 195; data[o + 1] = 238; data[o + 2] = 255; data[o + 3] = a;
+          }
+        }
+        lastLo = lo; lastHi = hi;
+        ctx.putImageData(buf, 0, 0);
+      }
+
+      function clearScan() {
+        if (!ctx) return;
+        wipe();
+        ctx.putImageData(buf, 0, 0);
+        scan.style.opacity = '0';
+      }
+
+      function sweep() {
+        if (!ctx) return;
+        var t0 = performance.now();
+        scan.style.opacity = '1';
+        requestAnimationFrame(function step(now) {
+          if (dragging) return;                  // the rack owns the band instead
+          var u = Math.min(1, (now - t0) / SCAN_MS);
+          // The band's WIDTH is in pixels too, not levels: a fixed number of
+          // levels is a hairline across the subject and swallows the whole wall,
+          // which only occupies about twenty levels of an inverse-depth map.
+          var q = Math.round(u * (sweepAt.length - 1)), W = 3;
+          var hi = sweepAt[Math.max(0, q - W)], lo = sweepAt[Math.min(sweepAt.length - 1, q + W)];
+          // Near to far, fading in and out so it arrives and leaves rather than
+          // snapping on.
+          band(Math.round((hi + lo) / 2), Math.max(2, Math.round((hi - lo) / 2)),
+               0.9 * Math.sin(Math.PI * u));
+          if (u < 1) { requestAnimationFrame(step); } else { clearScan(); }
+        });
+      }
+
+      // ---- loading --------------------------------------------------------
+
+      // 7.9 MB, none of it on the critical path: it starts after the page's own
+      // load event, on an idle callback, one file at a time so the sheets never
+      // compete with each other. Smallest first, so the scan and the rack are
+      // ready before the parallax is.
+      var started = false;
+
+      function fallback() {                      // a sheet did not arrive: use the clip
+        portrait.classList.remove('live');
+        var v = portrait.querySelector('video');
+        if (!v) return;
+        portrait.addEventListener('mouseenter', function () {
+          v.style.opacity = '1';
+          var r = v.play(); if (r && r.catch) r.catch(function () {});
+        });
+        portrait.addEventListener('mouseleave', function () {
+          v.style.opacity = '0';
+          v.pause();
+        });
+      }
+
+      function loadSheet(n) {
+        if (n >= sheets.length) return;
+        sheets[n].onload = function () { if (inside) paintView(); loadSheet(n + 1); };
+        sheets[n].onerror = fallback;
+        sheets[n].src = BASE + 'portrait_lf_' + n + '.jpg';
+      }
+
+      function load() {
+        if (started) return;
+        started = true;
+        var depth = new Image();
+        depth.onload = function () { initScan(depth); };
+        depth.src = BASE + 'portrait_depth.png';
+        strip.onload = strip.onerror = function () { loadSheet(0); };
+        strip.src = BASE + 'portrait_focus.jpg';
+      }
+
+      function idle(fn) {
+        if (window.requestIdleCallback) { window.requestIdleCallback(fn, { timeout: 3000 }); }
+        else { window.setTimeout(fn, 1200); }
+      }
+      if (document.readyState === 'complete') { idle(load); }
+      else { window.addEventListener('load', function () { idle(load); }); }
+
+      // ---- pointer ---------------------------------------------------------
+
       function at(e) {
         var r = portrait.getBoundingClientRect();
         tx = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
@@ -1215,46 +1405,25 @@ function revealEmail(el) {
         inside = false;
         lf.style.opacity = '0';
         if (hint) hint.style.opacity = '0';
+        clearScan();
         if (raf) { cancelAnimationFrame(raf); raf = 0; }
-      }
-
-      function load() {
-        if (ready) return;
-        ready = true;
-        sheet.onerror = function () {   // offline or a bad deploy: use the clip
-          portrait.classList.remove('live');
-          var v = portrait.querySelector('video');
-          if (!v) return;
-          portrait.addEventListener('mouseenter', function () {
-            v.style.opacity = '1';
-            var r = v.play(); if (r && r.catch) r.catch(function () {});
-          });
-          portrait.addEventListener('mouseleave', function () {
-            v.style.opacity = '0';
-            v.pause();
-          });
-          if (inside) { v.style.opacity = '1'; var r = v.play(); if (r && r.catch) r.catch(function () {}); }
-        };
-        sheet.onload = function () { if (inside) lf.style.opacity = '1'; };
-        sheet.src = 'assets/images/portrait_lf.jpg';
-        strip.src = 'assets/images/portrait_focus.jpg';   // 82 KB, so a drag is instant
       }
 
       portrait.addEventListener('pointerenter', function (e) {
         inside = true;
-        load();
+        load();                                  // in case the idle pass has not run
         at(e);
-        cx = tx; cy = ty;            // start under the pointer, do not swing in
+        cx = tx; cy = ty;                        // start under the pointer, do not swing in
         paintView();
-        if (sheet.complete && sheet.naturalWidth) lf.style.opacity = '1';
         if (!hinted && hint) hint.style.opacity = '1';
+        sweep();
       });
 
       portrait.addEventListener('pointermove', function (e) {
         if (dragging) {
-          // Any direction pulls focus, and reversing pulls it back: the two
-          // axes are summed rather than measured as path length, which would
-          // only ever run one way.
+          // Any direction pulls focus, and reversing pulls it back: the two axes
+          // are summed rather than measured as path length, which would only
+          // ever run one way.
           drag += (e.clientX - px) + (e.clientY - py);
           px = e.clientX; py = e.clientY;
           paintFocus();
@@ -1265,8 +1434,8 @@ function revealEmail(el) {
       });
 
       portrait.addEventListener('pointerdown', function (e) {
-        // No focus mode until the strip is actually decoded, or the first
-        // drag on a slow link would rack through a white square.
+        // No focus mode until the strip is decoded, or the first drag on a slow
+        // link would rack through a white square.
         if (e.button !== 0 || !strip.complete || !strip.naturalWidth) return;
         e.preventDefault();
         dragging = true;
@@ -1281,6 +1450,7 @@ function revealEmail(el) {
         if (!dragging) return;
         dragging = false;
         portrait.classList.remove('focusing', 'dragging');
+        clearScan();
         try { portrait.releasePointerCapture(e.pointerId); } catch (err) { /* never held */ }
         // Capture keeps a drag alive off the element, so the pointer can be
         // outside by the time it ends.

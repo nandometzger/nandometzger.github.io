@@ -296,23 +296,48 @@ h2 {
   transition: opacity .12s linear;
 }
 
-.portrait .lf .lf-sheet {
-  width: 1600%;
-  height: 1600%;
-}
+/* The 24x24 grid ships as four sheets of 12x12 rather than one enormous
+   image. Each is twelve tiles on a side, so translating one by -i/12 of its
+   own width lands on tile i. Only the sheet holding the current view is
+   shown; the 0.12s fade also hides the swap when the pointer crosses a seam,
+   where the two views are 0.3 degrees apart and all but identical anyway. */
 
-.portrait .lf .lf-strip {
-  width: 2400%;
-  height: 100%;
+.portrait .lf .lf-sheet {
+  width: 1200%;
+  height: 1200%;
   opacity: 0;
 }
 
-.portrait.focusing .lf .lf-sheet {
+.portrait .lf .lf-sheet.on {
+  opacity: 1;
+}
+
+.portrait .lf .lf-strip {
+  width: 600%;
+  height: 400%;
+  opacity: 0;
+}
+
+.portrait.focusing .lf .lf-sheet.on {
   opacity: 0;
 }
 
 .portrait.focusing .lf .lf-strip {
   opacity: 1;
+}
+
+/* The depth scan. Drawn at the depth map's own 512px and scaled down by CSS,
+   which keeps the band's edge crisp, and screened so it reads as light on the
+   photograph rather than as an overlay on top of it. */
+
+.portrait .lf-scan {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 
 .portrait .lf-hint {
