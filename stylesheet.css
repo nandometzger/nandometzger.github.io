@@ -223,6 +223,41 @@ h2 {
   line-height: 2;
 }
 
+/* ---- the portrait is a 3D reconstruction; hover plays it ---- */
+
+.portrait {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.portrait img,
+.portrait video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* preload="none" keeps this off the critical path. The portrait is the LCP
+   element, so nothing here may delay it. */
+.portrait video {
+  opacity: 0;
+  transition: opacity .25s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait video {
+    display: none;
+  }
+}
+
 /* ---- collapsed detail, used for background and older news ---- */
 
 details.more {

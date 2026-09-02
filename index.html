@@ -57,7 +57,7 @@
     ]
   }
   </script>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=55eb673b">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=211cf040">
 
 </head>
 
@@ -141,9 +141,12 @@ function revealEmail(el) {
                   </p>
                 </td>
                 <td class="hero-photo" style="padding:20px 0;width:37%;max-width:37%">
-                  <a href="./assets/images/Nando_Portrait.jpg"><img
-                      style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;"
-                      alt="Nando Metzger" src="./assets/images/Nando_Portrait.jpg"></a>
+                  <div class="portrait" title="It is a 3D reconstruction. Hover.">
+                    <img src="./assets/images/Nando_Portrait.jpg" alt="Nando Metzger">
+                    <video muted loop playsinline preload="none" aria-hidden="true">
+                      <source src="assets/images/portrait_3d.mp4" type="video/mp4">
+                    </video>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -1101,6 +1104,13 @@ function revealEmail(el) {
                 <td style="padding:0px">
                   <br>
                   <p style="text-align:right;font-size:small;">
+                    The portrait is a 3D reconstruction.
+                    <a href="https://github.com/apple/ml-sharp">SHARP</a> predicts the Gaussians,
+                    <a href="https://github.com/nandometzger/metal-gauss">metal-gauss</a> renders the
+                    orbit on Apple Silicon, and
+                    <a href="https://github.com/nandometzger/ml-bokeh">ml-bokeh</a> opens the
+                    aperture.
+                    <br>
                     Thank you for the template <a href="https://github.com/jonbarron/jonbarron_website">Jon
                       Barron</a>.
                   </p>
@@ -1117,11 +1127,11 @@ function revealEmail(el) {
   <script>
     // Teasers are inert until hovered: nothing downloads or plays otherwise.
     (function () {
-      Array.prototype.forEach.call(document.querySelectorAll('tr.card'), function (row) {
-        var overlay = row.querySelector('.two');
+      Array.prototype.forEach.call(document.querySelectorAll('tr.card, .portrait'), function (row) {
+        var overlay = row.querySelector('.two') || row.querySelector('video');
         if (!overlay) return;
         overlay.style.opacity = '0';
-        var vid = overlay.querySelector('video');
+        var vid = overlay.tagName === 'VIDEO' ? overlay : overlay.querySelector('video');
         row.addEventListener('mouseenter', function () {
           overlay.style.opacity = '1';
           if (vid) { var r = vid.play(); if (r && r.catch) r.catch(function () {}); }
