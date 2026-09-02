@@ -350,7 +350,7 @@ table.cards {
    has to be big enough to read as a gap. */
 table.exp td {
   vertical-align: top;
-  padding: 20px 0;
+  padding: 24px 0;
 }
 
 table.exp tr:first-child td {
