@@ -142,3 +142,91 @@ span.highlight {
 @keyframes blink {
   50% { opacity: 0; }
 }
+/* ---- hierarchy: hero tagline, contribution lines, collapsed detail ---- */
+
+.tagline {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.role {
+  color: #444;
+  font-style: italic;
+}
+
+.hero-links {
+  text-align: center;
+  line-height: 1.9;
+}
+
+details.more {
+  margin: 10px 0;
+}
+
+details.more > summary {
+  cursor: pointer;
+  color: #1772d0;
+  font-size: 14px;
+  list-style: none;
+}
+
+details.more > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.more > summary::before {
+  content: '\25B8\00a0';
+  display: inline-block;
+  transition: transform .15s ease-in-out;
+}
+
+details.more[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+details.more > summary:focus,
+details.more > summary:hover {
+  color: #f09228;
+}
+
+h2 {
+  scroll-margin-top: 12px;
+}
+
+/* ---- mobile: stack the two-column hero and project rows ---- */
+
+@media (max-width: 700px) {
+  .hero-bio,
+  .hero-photo,
+  .card-media,
+  .card-text {
+    display: block;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  .hero-photo {
+    padding: 0 5% 5% !important;
+  }
+
+  .hero-photo img {
+    display: block;
+    max-width: 220px !important;
+    margin: 0 auto;
+  }
+
+  .card-media {
+    padding: 20px 20px 0 !important;
+  }
+
+  .card-media .one,
+  .card-media .two {
+    margin: 0 auto;
+  }
+
+  .card-text {
+    padding: 10px 20px 20px !important;
+  }
+}
