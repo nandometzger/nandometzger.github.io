@@ -103,7 +103,7 @@ h2 {
 }
 
 .name {
-  padding-top: 20px;
+  padding-top: 4px;
   margin: 0;
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 32px;
@@ -157,6 +157,13 @@ a {
   line-height: 1.55;
 }
 
+/* Pure black on pure white at 14px is the harshest pairing available;
+   a near-black keeps the contrast ratio well past AA and reads softer. */
+body {
+  color: #1a1a1a;
+  background-color: #ffffff;
+}
+
 h2 {
   margin: 0 0 12px 0;
   padding-bottom: 8px;
@@ -192,12 +199,8 @@ h2 {
   font-weight: 700;
 }
 
-.lead .papertitle {
-  font-size: 19px;
-}
-
 .name {
-  padding-top: 20px;
+  padding-top: 4px;
   margin: 0 0 6px 0;
   font-size: 32px;
   font-weight: 700;
@@ -259,47 +262,39 @@ details.more > summary:hover {
    ============================================================ */
 
 .card-media {
-  width: 230px;
-  padding: 20px 20px 20px 0;
+  width: 170px;
+  padding: 14px 30px 14px 0;
   vertical-align: top;
 }
 
+/* The metadata block (authors, venue, contribution, links) is set tighter
+   than the prose so a card reads as one label plus one paragraph rather
+   than six stacked lines. */
 .card-text {
-  padding: 20px 0 20px 0;
+  padding: 14px 0 14px 0;
   vertical-align: top;
+  line-height: 1.45;
 }
 
-.one {
-  width: 160px;
-  height: 160px;
+.card-text p {
+  line-height: 1.55;
+  margin: 10px 0 0 0;
+}
+
+/* One tile size for every card. Two sizes meant three different gutters
+   between image and text down the page, which is what read as unbalanced;
+   the section headings carry the hierarchy instead. */
+.one,
+.two {
+  width: 170px;
+  height: 170px;
   position: relative;
 }
 
 .two {
-  width: 160px;
-  height: 160px;
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.lead .one,
-.lead .two {
-  width: 190px;
-  height: 190px;
-}
-
-/* Current roles are a supporting block, not the headline - smaller than
-   the research tiles so the work below keeps the visual weight. */
-.role-card .one,
-.role-card .two {
-  width: 130px;
-  height: 130px;
-}
-
-.role-card .one img {
-  outline: 1px solid #e6e6e6;
-  outline-offset: -1px;
 }
 
 /* the width/height attributes on the markup are only a fallback */
@@ -320,15 +315,33 @@ table.exp {
   margin-top: 4px;
 }
 
+/* Fixed layout so the first column is exactly 170px in the experience
+   table and in every card table, instead of each table auto-sizing to
+   its own content and drifting apart. */
+table.exp,
+table.cards {
+  table-layout: fixed;
+}
+
 table.exp td {
   vertical-align: top;
-  padding: 12px 0;
+  padding: 14px 0;
   border-top: 1px solid #f0f0f0;
 }
 
-.exp-logo {
-  width: 230px;
-  padding-right: 20px;
+table.exp tr:first-child td {
+  border-top: 0;
+}
+
+/* `table.exp td` sets padding and outranks a bare class selector, so the
+   gutter has to be specified at least as specifically or it is zeroed. */
+table.exp td.exp-logo {
+  width: 170px;
+  padding-right: 30px;
+}
+
+table.exp td.exp-date {
+  width: 130px;
 }
 
 /* Full colour and a common optical height. The source files carried
@@ -337,22 +350,35 @@ table.exp td {
    height could mean the same thing for each mark. */
 .exp-logo img {
   display: block;
-  height: 30px;
-  width: auto;
-  max-width: 210px;
+  height: auto;
+  max-height: 30px;
+  max-width: 170px;
   object-fit: contain;
 }
 
 /* A solid, boxed mark reads heavier than an open wordmark at the same
    height, so it gets set smaller to weigh the same. */
 .exp-logo img[src*="barry"] {
-  height: 22px;
+  max-height: 22px;
 }
 
-.exp-place {
+/* the two square brand marks need to be smaller than the wordmarks to
+   carry the same weight */
+.exp-logo img[src*="athlence"],
+.exp-logo img[src*="imflora"] {
+  max-height: 44px;
+}
+
+.exp-logo img[src*="imflora"] {
+  outline: 1px solid #e6e6e6;
+  outline-offset: -1px;
+}
+
+.exp-note {
   display: block;
   color: #666;
   font-size: 13px;
+  margin-top: 2px;
 }
 
 .exp-date {
@@ -385,7 +411,7 @@ table.exp td {
   }
 
   .card-media {
-    padding: 20px 0 0 0 !important;
+    padding: 16px 0 0 0 !important;
   }
 
   .card-media .one {
@@ -397,15 +423,53 @@ table.exp td {
   }
 
   table.exp td {
-    padding: 8px 0;
-  }
-
-  .exp-logo {
-    width: 90px;
-    padding-right: 12px;
+    padding: 10px 0;
   }
 
   .exp-date {
     font-size: 12px;
+  }
+}
+
+/* Below this width the three-column experience row cannot hold its
+   columns - the role text collapses to one word per line - so each row
+   becomes a stacked block instead. */
+@media (max-width: 560px) {
+  table.exp,
+  table.cards {
+    table-layout: auto;
+  }
+
+  table.exp tr {
+    display: block;
+    border-top: 1px solid #f0f0f0;
+    padding: 12px 0;
+  }
+
+  table.exp tr:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  table.exp td,
+  table.exp td.exp-logo,
+  table.exp td.exp-date {
+    display: block;
+    width: auto;
+    padding: 0;
+    border-top: 0;
+  }
+
+  table.exp td.exp-logo {
+    margin-bottom: 8px;
+  }
+
+  table.exp td.exp-logo img {
+    max-width: 130px;
+  }
+
+  table.exp td.exp-date {
+    text-align: left;
+    margin-top: 4px;
   }
 }
