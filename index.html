@@ -57,7 +57,7 @@
     ]
   }
   </script>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=1d18db31">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=fd3ca03d">
 
 </head>
 
@@ -108,17 +108,20 @@ function revealEmail(el) {
                   <p>
                     I build generative models for 3D and 4D scene reconstruction, and the systems that make
                     them run. At Athlence Sports I work on multi-view 4D reconstruction and generative novel
-                    view synthesis for dynamic sports scenes, spanning capture, calibration, scene
-                    representation and rendering. I did my Ph.D. at ETH Zurich in the Photogrammetry and
-                    Remote Sensing Lab, with research at Google and Meta. Alongside that runs a second body
-                    of work applying vision to satellite and aerial imagery, including population mapping
-                    and disaster response with the <a style="display:inline" href="https://www.icrc.org/en">ICRC</a>.
+                    view synthesis for dynamic sports scenes. Ph.D. from ETH Zurich, with research at Google
+                    and Meta.
                   </p>
 
                   <details class="more">
                     <summary>Background</summary>
                     <p>
-                      My doctoral advisors were
+                      At Athlence the work spans the whole chain: capture, calibration, scene representation
+                      and rendering. Alongside it runs a second body of work applying vision to satellite and
+                      aerial imagery, including population mapping and disaster response with the
+                      <a style="display:inline" href="https://www.icrc.org/en">ICRC</a>.
+                    </p>
+                    <p>
+                      I did the Ph.D. in the Photogrammetry and Remote Sensing Lab. My doctoral advisors were
                       <a style="display:inline" href="https://scholar.google.ch/citations?user=FZuNgqIAAAAJ&hl=en">Prof.
                         Konrad Schindler</a> and
                       <a style="display:inline" href="https://scholar.google.com/citations?user=p3iJiLIAAAAJ&hl=en">Prof.
@@ -1113,11 +1116,13 @@ function revealEmail(el) {
                 <td style="padding:0px">
                   <br>
                   <p style="text-align:right;font-size:small;">
-                    The portrait is a 3D reconstruction, and it follows the pointer.
-                    <a href="https://github.com/apple/ml-sharp">SHARP</a> predicts the Gaussians from
-                    one photograph;
-                    <a href="https://github.com/nandometzger/metal-gauss">metal-gauss</a> renders them
-                    on Apple Silicon, 256 views for the parallax and 24 focus steps for the rack.
+                    The portrait is a 3D reconstruction. It follows the pointer, and dragging it pulls
+                    focus through a synthetic aperture: 576 pre-rendered views for the parallax, and a rack
+                    of focus steps whose depth of field is drawn from the predicted depth map.
+                    <a href="https://github.com/apple/ml-sharp">SHARP</a> predicts the Gaussians from one
+                    photograph and
+                    <a href="https://github.com/nandometzger/metal-gauss">metal-gauss</a> renders them on
+                    Apple Silicon.
                     <br>
                     Thank you for the template <a href="https://github.com/jonbarron/jonbarron_website">Jon
                       Barron</a>.
@@ -1135,7 +1140,7 @@ function revealEmail(el) {
   <script>
     (function () {
       var GRID = 24, SPLIT = 2, PER = GRID / SPLIT;   // 24x24 views, 2x2 sheets
-      var STEPS = 24, FCOLS = 6, FROWS = 4;           // focus strip layout
+      var STEPS = 32, FCOLS = 8, FROWS = 4;           // focus strip layout
       var EASE = 0.2;      // pointer smoothing; the raw pointer strobes between tiles
       var DRAG_PX = 12;    // pixels of drag per focus step
       var SCAN_MS = 300;   // the iso-depth sweep on arrival
@@ -1143,7 +1148,10 @@ function revealEmail(el) {
       // NEAR and FAR_MAP are the depth map's own bounds, printed by the render
       // script; FAR_FOCUS is where the focus strip stops.
       var NEAR = 1.8783, FAR_MAP = 13.4814, FAR_FOCUS = 6.0;
-      var FOCUS_NEAR = 2.13;   // the strip starts on the face, not at NEAR
+      // The rack starts at NEAR, the map's own near bound. It used to start at
+      // the pivot, 2.13 m, which is the median depth of the splats near the
+      // optical axis -- but the eyes are at 2.04 and the nose at 2.05, so the
+      // sharpest frame was focused behind the face with no step in front of it.
       var BASE = 'assets/images/';
 
       var portrait = document.querySelector('.portrait');
@@ -1186,7 +1194,7 @@ function revealEmail(el) {
       portrait.removeAttribute('title');   // the hint says it better, and in place
       portrait.classList.add('live');
 
-      var inside = false, dragging = false, hinted = false, shown = -1;
+      var inside = false, dragging = false, shown = -1;
       var tx = 0.5, ty = 0.5, cx = 0.5, cy = 0.5, drag = 0, raf = 0, px = 0, py = 0;
 
       // ---- views --------------------------------------------------------
@@ -1226,7 +1234,7 @@ function revealEmail(el) {
       var focusLevel = [];
       for (var k = 0; k < STEPS; k++) {
         var f = k / (STEPS - 1);
-        var inv = (1 - f) / FOCUS_NEAR + f / FAR_FOCUS;
+        var inv = (1 - f) / NEAR + f / FAR_FOCUS;
         focusLevel.push(Math.round(255 * (inv - 1 / FAR_MAP) / (1 / NEAR - 1 / FAR_MAP)));
       }
 
@@ -1415,7 +1423,9 @@ function revealEmail(el) {
         at(e);
         cx = tx; cy = ty;                        // start under the pointer, do not swing in
         paintView();
-        if (!hinted && hint) hint.style.opacity = '1';
+        // Shown on every arrival, not just until the first drag: one drag used
+        // to retire it for the rest of the visit, which just made it look gone.
+        if (hint) hint.style.opacity = '1';
         sweep();
       });
 
@@ -1442,7 +1452,7 @@ function revealEmail(el) {
         px = e.clientX; py = e.clientY;
         portrait.classList.add('focusing', 'dragging');
         paintFocus();
-        if (hint) { hinted = true; hint.style.opacity = '0'; }
+        if (hint) hint.style.opacity = '0';   // it has been taken up; get out of the way
         try { portrait.setPointerCapture(e.pointerId); } catch (err) { /* no capture, no harm */ }
       });
 
