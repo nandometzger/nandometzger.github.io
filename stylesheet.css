@@ -428,10 +428,11 @@ details.more > summary:hover {
   vertical-align: top;
 }
 
-/* Papers with an award or a highlight get a rule down their left edge. It
-   marks the same handful of entries the red tag marks, but from the margin,
-   so the eye can find them while skimming instead of having to read each
-   venue line. Orange is the accent already in the stylesheet. */
+/* Selected papers get a rule down their left edge, so they are findable
+   while skimming instead of only by reading each venue line. Most of them
+   carry an award or a highlight and say so in the red tag; POPCORN does not,
+   and is marked because it is the work worth finding in that section.
+   Orange is the accent already in the stylesheet. */
 tr.card.flagged .card-media::before {
   content: "";
   position: absolute;
