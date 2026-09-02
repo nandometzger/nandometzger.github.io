@@ -258,6 +258,78 @@ h2 {
   }
 }
 
+/* The hover state is a light field: 16x16 pre-rendered views on one sheet.
+   The sheet is moved with a transform rather than a background-position, so
+   the compositor does the work and nothing re-rasters per frame. It is 16x the
+   tile in each axis, so translating it by -i/16 of its own width lands on
+   tile i. The focus strip is the same trick in one dimension. */
+
+.portrait {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.portrait.live {
+  cursor: grab;
+}
+
+.portrait.dragging {
+  cursor: grabbing;
+}
+
+.portrait .lf {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .2s ease-in-out;
+}
+
+.portrait .lf img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  max-width: none !important;
+  -webkit-user-drag: none;
+  will-change: transform;
+  transition: opacity .12s linear;
+}
+
+.portrait .lf .lf-sheet {
+  width: 1600%;
+  height: 1600%;
+}
+
+.portrait .lf .lf-strip {
+  width: 2400%;
+  height: 100%;
+  opacity: 0;
+}
+
+.portrait.focusing .lf .lf-sheet {
+  opacity: 0;
+}
+
+.portrait.focusing .lf .lf-strip {
+  opacity: 1;
+}
+
+.portrait .lf-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 9%;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .65);
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  pointer-events: none;
+}
+
 /* ---- collapsed detail, used for background and older news ---- */
 
 details.more {
@@ -489,10 +561,11 @@ ul.talks .talk-year {
     padding: 0 5% 5% !important;
   }
 
-  .hero-photo img {
-    display: block;
-    max-width: 200px !important;
-    margin: 0 auto;
+  /* Clamp the frame, not the photograph inside it. The portrait is a circular
+     container the image fills absolutely, so capping the image left white
+     slivers down either side of a 300px circle. */
+  .hero-photo .portrait {
+    max-width: 200px;
   }
 
   .card-media {

@@ -57,7 +57,7 @@
     ]
   }
   </script>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=211cf040">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=a979adef">
 
 </head>
 
@@ -143,6 +143,11 @@ function revealEmail(el) {
                 <td class="hero-photo" style="padding:20px 0;width:37%;max-width:37%">
                   <div class="portrait" title="It is a 3D reconstruction. Hover.">
                     <img src="./assets/images/Nando_Portrait.jpg" alt="Nando Metzger">
+                    <div class="lf" aria-hidden="true">
+                      <img class="lf-sheet" alt="">
+                      <img class="lf-strip" alt="">
+                    </div>
+                    <span class="lf-hint" aria-hidden="true">drag to pull focus</span>
                     <video muted loop playsinline preload="none" aria-hidden="true">
                       <source src="assets/images/portrait_3d.mp4" type="video/mp4">
                     </video>
@@ -1104,12 +1109,11 @@ function revealEmail(el) {
                 <td style="padding:0px">
                   <br>
                   <p style="text-align:right;font-size:small;">
-                    The portrait is a 3D reconstruction.
-                    <a href="https://github.com/apple/ml-sharp">SHARP</a> predicts the Gaussians,
-                    <a href="https://github.com/nandometzger/metal-gauss">metal-gauss</a> renders the
-                    orbit on Apple Silicon, and
-                    <a href="https://github.com/nandometzger/ml-bokeh">ml-bokeh</a> opens the
-                    aperture.
+                    The portrait is a 3D reconstruction, and it follows the pointer.
+                    <a href="https://github.com/apple/ml-sharp">SHARP</a> predicts the Gaussians from
+                    one photograph;
+                    <a href="https://github.com/nandometzger/metal-gauss">metal-gauss</a> renders them
+                    on Apple Silicon, 256 views for the parallax and 24 focus steps for the rack.
                     <br>
                     Thank you for the template <a href="https://github.com/jonbarron/jonbarron_website">Jon
                       Barron</a>.
@@ -1125,9 +1129,22 @@ function revealEmail(el) {
   </table>
 
   <script>
-    // Teasers are inert until hovered: nothing downloads or plays otherwise.
     (function () {
+      var GRID = 16;      // views per axis on portrait_lf.jpg
+      var STEPS = 24;     // focus steps on portrait_focus.jpg
+      var EASE = 0.2;     // pointer smoothing; the raw pointer strobes between tiles
+      var DRAG_PX = 14;   // pixels of drag per focus step
+
+      var portrait = document.querySelector('.portrait');
+      // Touch has no hover to answer, so it keeps the small clip that was
+      // already here. Reduced motion gets neither: the still, and nothing else.
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var live = !!portrait && !reduced &&
+        window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      // Teasers are inert until hovered: nothing downloads or plays otherwise.
       Array.prototype.forEach.call(document.querySelectorAll('tr.card, .portrait'), function (row) {
+        if (row === portrait && (live || reduced)) return;   // light field, or nothing at all
         var overlay = row.querySelector('.two') || row.querySelector('video');
         if (!overlay) return;
         overlay.style.opacity = '0';
@@ -1141,6 +1158,141 @@ function revealEmail(el) {
           if (vid) vid.pause();
         });
       });
+
+      if (!live) return;
+
+      // The portrait is a light field, not a clip: 256 views pre-rendered on
+      // one sheet, so the pointer moves a real camera around the
+      // reconstruction. Every view was rendered looking AT the face, which is
+      // what keeps the head pinned while the background slides.
+      var lf = portrait.querySelector('.lf');
+      var sheet = portrait.querySelector('.lf-sheet');
+      var strip = portrait.querySelector('.lf-strip');
+      var hint = portrait.querySelector('.lf-hint');
+      if (!lf || !sheet || !strip) return;
+
+      portrait.removeAttribute('title');   // the hint says it better, and in place
+      portrait.classList.add('live');
+
+      var ready = false, inside = false, dragging = false, hinted = false;
+      var tx = 0.5, ty = 0.5, cx = 0.5, cy = 0.5, drag = 0, raf = 0, px = 0, py = 0;
+
+      function paintView() {
+        var i = Math.round(cx * (GRID - 1));
+        var j = Math.round(cy * (GRID - 1));
+        sheet.style.transform =
+          'translate3d(' + (-i * 100 / GRID) + '%,' + (-j * 100 / GRID) + '%,0)';
+      }
+
+      function paintFocus() {
+        // Ping-pong, so one continuous drag racks out to the far plane and back
+        // with no jump at either end. The strip therefore holds 24 distinct
+        // depths rather than 48 frames of a there-and-back loop.
+        var period = 2 * (STEPS - 1);
+        var k = Math.round(drag / DRAG_PX) % period;
+        if (k < 0) k += period;
+        if (k >= STEPS) k = period - k;
+        strip.style.transform = 'translate3d(' + (-k * 100 / STEPS) + '%,0,0)';
+      }
+
+      function tick() {
+        raf = 0;
+        cx += (tx - cx) * EASE;
+        cy += (ty - cy) * EASE;
+        paintView();
+        if (Math.abs(tx - cx) > 5e-4 || Math.abs(ty - cy) > 5e-4) {
+          raf = requestAnimationFrame(tick);
+        }
+      }
+
+      function at(e) {
+        var r = portrait.getBoundingClientRect();
+        tx = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+        ty = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+      }
+
+      function hide() {
+        inside = false;
+        lf.style.opacity = '0';
+        if (hint) hint.style.opacity = '0';
+        if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      }
+
+      function load() {
+        if (ready) return;
+        ready = true;
+        sheet.onerror = function () {   // offline or a bad deploy: use the clip
+          portrait.classList.remove('live');
+          var v = portrait.querySelector('video');
+          if (!v) return;
+          portrait.addEventListener('mouseenter', function () {
+            v.style.opacity = '1';
+            var r = v.play(); if (r && r.catch) r.catch(function () {});
+          });
+          portrait.addEventListener('mouseleave', function () {
+            v.style.opacity = '0';
+            v.pause();
+          });
+          if (inside) { v.style.opacity = '1'; var r = v.play(); if (r && r.catch) r.catch(function () {}); }
+        };
+        sheet.onload = function () { if (inside) lf.style.opacity = '1'; };
+        sheet.src = 'assets/images/portrait_lf.jpg';
+        strip.src = 'assets/images/portrait_focus.jpg';   // 82 KB, so a drag is instant
+      }
+
+      portrait.addEventListener('pointerenter', function (e) {
+        inside = true;
+        load();
+        at(e);
+        cx = tx; cy = ty;            // start under the pointer, do not swing in
+        paintView();
+        if (sheet.complete && sheet.naturalWidth) lf.style.opacity = '1';
+        if (!hinted && hint) hint.style.opacity = '1';
+      });
+
+      portrait.addEventListener('pointermove', function (e) {
+        if (dragging) {
+          // Any direction pulls focus, and reversing pulls it back: the two
+          // axes are summed rather than measured as path length, which would
+          // only ever run one way.
+          drag += (e.clientX - px) + (e.clientY - py);
+          px = e.clientX; py = e.clientY;
+          paintFocus();
+        } else {
+          at(e);
+          if (!raf) raf = requestAnimationFrame(tick);
+        }
+      });
+
+      portrait.addEventListener('pointerdown', function (e) {
+        // No focus mode until the strip is actually decoded, or the first
+        // drag on a slow link would rack through a white square.
+        if (e.button !== 0 || !strip.complete || !strip.naturalWidth) return;
+        e.preventDefault();
+        dragging = true;
+        px = e.clientX; py = e.clientY;
+        portrait.classList.add('focusing', 'dragging');
+        paintFocus();
+        if (hint) { hinted = true; hint.style.opacity = '0'; }
+        try { portrait.setPointerCapture(e.pointerId); } catch (err) { /* no capture, no harm */ }
+      });
+
+      function stop(e) {
+        if (!dragging) return;
+        dragging = false;
+        portrait.classList.remove('focusing', 'dragging');
+        try { portrait.releasePointerCapture(e.pointerId); } catch (err) { /* never held */ }
+        // Capture keeps a drag alive off the element, so the pointer can be
+        // outside by the time it ends.
+        var r = portrait.getBoundingClientRect();
+        if (e && (e.clientX < r.left || e.clientX > r.right ||
+                  e.clientY < r.top || e.clientY > r.bottom)) { hide(); return; }
+        if (e) { at(e); if (!raf) raf = requestAnimationFrame(tick); }   // catch the view up
+      }
+
+      portrait.addEventListener('pointerup', stop);
+      portrait.addEventListener('pointercancel', stop);
+      portrait.addEventListener('pointerleave', function () { if (!dragging) hide(); });
     })();
   </script>
 </body>
