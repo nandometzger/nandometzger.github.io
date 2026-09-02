@@ -169,7 +169,7 @@ h2 {
   padding-bottom: 8px;
   border-bottom: 1px solid #e6e6e6;
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 27px;
   font-weight: 700;
   letter-spacing: -0.01em;
   scroll-margin-top: 12px;
@@ -364,12 +364,16 @@ table.exp td.exp-date {
   object-fit: contain;
 }
 
-.exp-logo img[src*="athlence"]  { height: 38px; }
-.exp-logo img[src*="imflora"]   { height: 52px; }
-.exp-logo img[src*="Google"]    { height: 33px; }
-.exp-logo img[src*="meta"]      { height: 25px; }
-.exp-logo img[src*="eth_logo"]  { height: 22px; }
-.exp-logo img[src*="barry"]     { height: 22px; }
+.exp-logo img[src*="athlence"]  { height: 50px; }
+.exp-logo img[src*="imflora"]   { height: 66px; }
+.exp-logo img[src*="Google"]    { height: 43px; }
+.exp-logo img[src*="meta"]      { height: 28px; }
+.exp-logo img[src*="eth_logo"]  { height: 24px; }
+
+/* A saturated solid fill reads far heavier than its luminance suggests,
+   which the ink measure underweights, so this one is set smallest. Below
+   about 16px the wordmark inside the box stops being legible. */
+.exp-logo img[src*="barry"]     { height: 17px; }
 
 .exp-note {
   display: block;
