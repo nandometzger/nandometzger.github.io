@@ -142,24 +142,85 @@ span.highlight {
 @keyframes blink {
   50% { opacity: 0; }
 }
-/* ---- hierarchy: hero tagline, contribution lines, collapsed detail ---- */
+/* ============================================================
+   Hierarchy. Sections outrank items; items outrank their meta.
+   Before this, h2 was 22px/400 while the titles inside it were
+   18px/700, so every card out-weighed the section holding it.
+   ============================================================ */
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  line-height: 1.55;
+}
+
+h2 {
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e6e6e6;
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 12px;
+}
+
+.section-head {
+  padding: 34px 0 2px 0;
+}
+
+/* A one-line blurb under a heading is muted; body paragraphs in a
+   section read as normal text and space normally. */
+.section-head p.blurb {
+  color: #555;
+  margin: 0;
+}
+
+.section-head p {
+  margin: 0 0 12px 0;
+}
+
+.section-head p:last-child {
+  margin-bottom: 0;
+}
+
+.papertitle {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.lead .papertitle {
+  font-size: 19px;
+}
+
+.name {
+  padding-top: 20px;
+  margin: 0 0 6px 0;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
 
 .tagline {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 700;
-  margin: 0 0 10px 0;
+  margin: 0 0 12px 0;
 }
 
 .role {
   color: #444;
   font-style: italic;
+  font-size: 13px;
 }
 
 .hero-links {
-  text-align: center;
-  line-height: 1.9;
+  line-height: 2;
 }
+
+/* ---- collapsed detail, used for background and older news ---- */
 
 details.more {
   margin: 10px 0;
@@ -191,11 +252,117 @@ details.more > summary:hover {
   color: #f09228;
 }
 
-h2 {
-  scroll-margin-top: 12px;
+/* ============================================================
+   Card grid. One media-column width throughout, so thumbnails
+   share a left edge and text blocks share a left edge all the
+   way down the page. Only the tile size carries the hierarchy.
+   ============================================================ */
+
+.card-media {
+  width: 230px;
+  padding: 20px 20px 20px 0;
+  vertical-align: top;
 }
 
-/* ---- mobile: stack the two-column hero and project rows ---- */
+.card-text {
+  padding: 20px 0 20px 0;
+  vertical-align: top;
+}
+
+.one {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.two {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.lead .one,
+.lead .two {
+  width: 190px;
+  height: 190px;
+}
+
+/* Current roles are a supporting block, not the headline - smaller than
+   the research tiles so the work below keeps the visual weight. */
+.role-card .one,
+.role-card .two {
+  width: 130px;
+  height: 130px;
+}
+
+.role-card .one img {
+  outline: 1px solid #e6e6e6;
+  outline-offset: -1px;
+}
+
+/* the width/height attributes on the markup are only a fallback */
+.one img,
+.one video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   Experience. The affiliation logos used to float free of any
+   role or date; here each one is attached to what it refers to.
+   ============================================================ */
+
+table.exp {
+  margin-top: 4px;
+}
+
+table.exp td {
+  vertical-align: top;
+  padding: 12px 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.exp-logo {
+  width: 230px;
+  padding-right: 20px;
+}
+
+/* Full colour and a common optical height. The source files carried
+   very different amounts of built-in padding - Google was 27% vertical
+   whitespace, ETH 24% - so they were trimmed to their ink before this
+   height could mean the same thing for each mark. */
+.exp-logo img {
+  display: block;
+  height: 30px;
+  width: auto;
+  max-width: 210px;
+  object-fit: contain;
+}
+
+/* A solid, boxed mark reads heavier than an open wordmark at the same
+   height, so it gets set smaller to weigh the same. */
+.exp-logo img[src*="barry"] {
+  height: 22px;
+}
+
+.exp-place {
+  display: block;
+  color: #666;
+  font-size: 13px;
+}
+
+.exp-date {
+  text-align: right;
+  color: #666;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* ---- mobile: stack the two-column hero and card rows ---- */
 
 @media (max-width: 700px) {
   .hero-bio,
@@ -213,20 +380,32 @@ h2 {
 
   .hero-photo img {
     display: block;
-    max-width: 220px !important;
+    max-width: 200px !important;
     margin: 0 auto;
   }
 
   .card-media {
-    padding: 20px 20px 0 !important;
+    padding: 20px 0 0 0 !important;
   }
 
-  .card-media .one,
-  .card-media .two {
+  .card-media .one {
     margin: 0 auto;
   }
 
   .card-text {
-    padding: 10px 20px 20px !important;
+    padding: 10px 0 20px 0 !important;
+  }
+
+  table.exp td {
+    padding: 8px 0;
+  }
+
+  .exp-logo {
+    width: 90px;
+    padding-right: 12px;
+  }
+
+  .exp-date {
+    font-size: 12px;
   }
 }
