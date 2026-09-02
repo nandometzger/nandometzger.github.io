@@ -262,7 +262,7 @@ details.more > summary:hover {
    ============================================================ */
 
 .card-media {
-  width: 170px;
+  width: 150px;
   padding: 14px 30px 14px 0;
   vertical-align: top;
 }
@@ -286,9 +286,11 @@ details.more > summary:hover {
    the section headings carry the hierarchy instead. */
 .one,
 .two {
-  width: 170px;
-  height: 170px;
+  width: 150px;
+  height: 150px;
   position: relative;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .two {
@@ -336,7 +338,7 @@ table.exp tr:first-child td {
 /* `table.exp td` sets padding and outranks a bare class selector, so the
    gutter has to be specified at least as specifically or it is zeroed. */
 table.exp td.exp-logo {
-  width: 170px;
+  width: 150px;
   padding-right: 30px;
 }
 
@@ -348,31 +350,26 @@ table.exp td.exp-date {
    very different amounts of built-in padding - Google was 27% vertical
    whitespace, ETH 24% - so they were trimmed to their ink before this
    height could mean the same thing for each mark. */
+/* Sized per logo, not to a common height. Ink coverage inside the
+   bounding box runs from 16% (Google) to 41% (ETH, Barry Callebaut), so
+   equal height gave ETH and Barry roughly two and a half times the ink of
+   Google and left the compact marks looking lost. These heights sit
+   between equal-height and equal-ink-mass, which is where they actually
+   look the same size. */
 .exp-logo img {
   display: block;
   height: auto;
-  max-height: 30px;
-  max-width: 170px;
+  width: auto;
+  max-width: 160px;
   object-fit: contain;
 }
 
-/* A solid, boxed mark reads heavier than an open wordmark at the same
-   height, so it gets set smaller to weigh the same. */
-.exp-logo img[src*="barry"] {
-  max-height: 22px;
-}
-
-/* the two square brand marks need to be smaller than the wordmarks to
-   carry the same weight */
-.exp-logo img[src*="athlence"],
-.exp-logo img[src*="imflora"] {
-  max-height: 44px;
-}
-
-.exp-logo img[src*="imflora"] {
-  outline: 1px solid #e6e6e6;
-  outline-offset: -1px;
-}
+.exp-logo img[src*="athlence"]  { height: 38px; }
+.exp-logo img[src*="imflora"]   { height: 52px; }
+.exp-logo img[src*="Google"]    { height: 33px; }
+.exp-logo img[src*="meta"]      { height: 25px; }
+.exp-logo img[src*="eth_logo"]  { height: 22px; }
+.exp-logo img[src*="barry"]     { height: 22px; }
 
 .exp-note {
   display: block;
