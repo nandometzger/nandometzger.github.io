@@ -1259,6 +1259,18 @@ function revealEmail(el) {
       portrait.removeAttribute('title');   // the hint says it better, and in place
       portrait.classList.add('live');
 
+      // A photograph gives no sign that it is a reconstruction, and until now
+      // the only way to find out was to hover -- which you had to already
+      // suspect. It says so at rest, and changes to the second instruction
+      // once the first has been taken up.
+      var REST = 'hover for 3D', HOVER = 'drag to pull focus';
+      function label(text, dim) {
+        if (!hint) return;
+        hint.textContent = text;
+        hint.style.opacity = dim ? '0.72' : '1';
+      }
+      label(REST, true);
+
       var inside = false, dragging = false, shown = -1;
       var tx = 0.5, ty = 0.5, cx = 0.5, cy = 0.5, drag = 0, raf = 0, px = 0, py = 0;
 
@@ -1477,7 +1489,7 @@ function revealEmail(el) {
       function hide() {
         inside = false;
         lf.style.opacity = '0';
-        if (hint) hint.style.opacity = '0';
+        label(REST, true);
         clearScan();
         if (raf) { cancelAnimationFrame(raf); raf = 0; }
       }
@@ -1490,7 +1502,7 @@ function revealEmail(el) {
         paintView();
         // Shown on every arrival, not just until the first drag: one drag used
         // to retire it for the rest of the visit, which just made it look gone.
-        if (hint) hint.style.opacity = '1';
+        label(HOVER, false);
         sweep();
       });
 
@@ -1517,7 +1529,7 @@ function revealEmail(el) {
         px = e.clientX; py = e.clientY;
         portrait.classList.add('focusing', 'dragging');
         paintFocus();
-        if (hint) hint.style.opacity = '0';   // it has been taken up; get out of the way
+        if (hint) hint.style.opacity = '0';   // taken up; get out of the way
         try { portrait.setPointerCapture(e.pointerId); } catch (err) { /* no capture, no harm */ }
       });
 
