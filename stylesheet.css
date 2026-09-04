@@ -268,7 +268,21 @@ ul.talks .talk-year {
   font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-.exp-date,
+/* The job descriptions go monospace only where there is room for it. In a
+   374px phone column the Athlence description runs 8 lines in mono against 5
+   in Lato -- 161px against 101 -- so the phone keeps the proportional face. */
+@media (min-width: 701px) {
+  .exp-note {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+}
+
+/* The date keeps 13px, set with the rest of the muted metadata below; only
+   the tracking is tightened here, because monospace sets loose at this size. */
+.exp-date {
+  letter-spacing: -0.02em;
+}
+
 ul.talks .talk-year {
   font-size: 12px;
   letter-spacing: -0.02em;
@@ -629,7 +643,10 @@ table.exp td.exp-logo a.lockup img {
 }
 
 table.exp td.exp-date {
-  width: 130px;
+  /* 152, not 130: the longest date is 151px in IBM Plex Mono at 13px, and
+     with white-space:nowrap anything narrower lets it hang past the column
+     and break the flush right edge. */
+  width: 152px;
 }
 
 /* Full colour and a common optical height. The source files carried
@@ -732,7 +749,7 @@ ul.talks .talk-year {
   }
 
   .name {
-    font-size: 30px;
+    font-size: 24px;
     /* The portrait floats right here, and a block's background still spans
        the full column under a float -- so at full width this rule ran behind
        the circle and showed through its corners. */
@@ -740,13 +757,37 @@ ul.talks .talk-year {
   }
 
   .tagline {
-    font-size: 16px;
+    font-size: 14.5px;
+  }
+
+  /* 27px headings and a 30px name sat in a 374px column: the name took half
+     the width and a section heading weighed as much as its own content. */
+  body,
+  td,
+  th,
+  tr,
+  p,
+  a {
+    font-size: 13px;
+  }
+
+  .papertitle {
+    font-size: 15.5px;
+  }
+
+  .exp-role {
+    font-size: 12.5px;
+  }
+
+  .exp-note,
+  .role {
+    font-size: 12px;
   }
 
   /* 27px headings cost two lines each at this width and pushed the page
      apart; the rule under them carries the same separation at 23. */
   h2 {
-    font-size: 23px;
+    font-size: 19px;
     margin-bottom: 10px;
   }
 
