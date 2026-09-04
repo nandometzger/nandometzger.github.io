@@ -699,10 +699,19 @@ ul.talks .talk-year {
   color: #777;
 }
 
+/* The role is the row's headline now that the organisation name has moved on
+   to the logo, so it carries the weight the name used to. 700 and not 600
+   because the stylesheet only loads Lato at 400 and 700; asking for 600 gets
+   a synthesised face or a snap to 700 anyway. */
+.exp-role {
+  font-weight: 700;
+}
+
 .exp-note {
   display: block;
   color: #666;
   font-size: 13px;
+  font-weight: 400;
   margin-top: 2px;
 }
 
