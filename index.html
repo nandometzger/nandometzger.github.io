@@ -76,8 +76,16 @@
   gtag('config', 'G-5FBRP8LCRB');
 </script>
 <script>
+function decodePart(hex, shift) {
+  var out = '';
+  for (var i = 0; i < hex.length; i += 2) {
+    out += String.fromCharCode(parseInt(hex.substr(i, 2), 16) - shift);
+  }
+  return out;
+}
 function revealEmail(el) {
-  var email = el.dataset.email.split('').reverse().join('');
+  var p2 = document.body.dataset.cx2;
+  var email = decodePart(el.dataset.cx1, 7) + decodePart(p2, 13);
   var parent = el.parentElement;
   var i = 0;
   parent.innerHTML = '<span class="email-revealing"></span>';
@@ -96,7 +104,7 @@ function revealEmail(el) {
 }
 </script>
 
-<body>
+<body data-cx2="727f4d7c8281797c7c783b707c7a">
   <table
     style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
     <tbody>
@@ -1103,7 +1111,7 @@ function revealEmail(el) {
                     research systems that ship.
                   </p>
                   <p>
-                    <span>***@***.com <a href="#" onclick="revealEmail(this); return false;" data-email="moc.kooltuo@regztem.odnan">[reveal]</a></span> &nbsp;/&nbsp;
+                    <span>***@***.com <a href="#" onclick="revealEmail(this); return false;" data-cx1="7568756b7635746c7b816e">[reveal]</a></span> &nbsp;/&nbsp;
                         <a href="https://github.com/nandometzger/">GitHub</a> &nbsp;/&nbsp;
                         <a href="https://www.linkedin.com/in/nando-metzger-68aa0518b/">LinkedIn</a> &nbsp;/&nbsp;
                         <a href="https://scholar.google.ch/citations?hl=en&user=pGqbcuIAAAAJ">Google Scholar</a>
